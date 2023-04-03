@@ -82,13 +82,13 @@ export default {
             message: "",
             transations: [],
             formatedTransations: [],
-            recipient: ""
+            recipient: "",
         };
     },
 
     mounted() {
         this.connect();
-        window.setInterval(this.formatTransations, 1000);
+        window.setInterval(this.formatTransations, 3000);
     },
 
     unmounted() {
@@ -102,14 +102,15 @@ export default {
             if (typeof provider !== "undefined") {
                 // MetaMask is installed
 
-                provider
+                await provider
                     .request({ method: "eth_requestAccounts" })
                     .then((accounts) => {
                         this.accounts = accounts;
                         console.log(`current account is ${this.accounts[0]}`);
                     })
                     .catch((err) => {
-                        console.log(err);
+                        console.error(err);
+                        return;
                     });
 
                 window.ethereum.on("accountsChanged", function (accounts) {
@@ -121,11 +122,12 @@ export default {
             }
 
             // FIXME: current only support metamask provider
-            this.web3 = new Web3(provider);
-            for (let accAddr of this.accounts) {
-                let balance = await this.getBalance(accAddr);
-                console.log(accAddr, balance);
-            }
+            this.web3 = new Web3();
+            this.web3.setProvider(provider);
+            // for (let accAddr of this.accounts) {
+            //     let balance = await this.getBalance(accAddr);
+            //     console.log(accAddr, balance);
+            // }
 
             // FIXME: this is the self defined provider
             // this.web3.setProvider(
@@ -141,10 +143,12 @@ export default {
         },
 
         formatTransations() {
-            this.formatedTransations = this.transations.map((trans) => ({
-                ...trans,
-                date: moment(trans.date).fromNow(),
-            }));
+            this.formatedTransations = this.transations.map((trans) => {
+                return {
+                    ...trans,
+                    date: moment(trans.date).fromNow(),
+                };
+            });
         },
 
         appendTransation(blockHash) {
@@ -152,23 +156,27 @@ export default {
             this.formatTransations();
         },
 
-        async withdraw(amount) {
+        async withdraw(amount, address) {
             const networkId = await this.web3.eth.net.getId();
             const FaucetContract = new this.web3.eth.Contract(
                 FaucetBuild.abi,
                 FaucetBuild.networks[networkId].address
             );
             return FaucetContract.methods
-                .withdraw(Web3.utils.toWei(amount, "ether"))
+                .withdraw(Web3.utils.toWei(amount, "ether"), address)
                 .send({ from: this.accounts[0] });
         },
 
         async withdarwHandler() {
             const amount = "0.01";
-            this.withdraw(amount).then((msg) => {
-                console.log(msg);
-                this.appendTransation(msg.transactionHash);
-            });
+            this.withdraw(amount, this.recipient)
+                .then((msg) => {
+                    console.log(msg);
+                    this.appendTransation(msg.transactionHash);
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
         },
     },
 };

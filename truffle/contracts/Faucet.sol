@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: CC-BY-SA-4.0
 
 // Version of Solidity compiler this program was written for
-pragma solidity ^0.6.4;
+pragma solidity ^0.8.4;
 
 contract Owned {
     address payable owner;
 
     // Contract constructor: set owner
-    constructor() public {
-        owner = msg.sender;
+    constructor() {
+        owner = payable(msg.sender);
     }
 
     // Access control modifier
@@ -21,7 +21,8 @@ contract Owned {
 contract Mortal is Owned {
     // Contract destructor
     function destroy() public onlyOwner {
-        selfdestruct(owner);
+        // selfdestruct(owner);
+        payable(owner).transfer(address(this).balance);
     }
 }
 
@@ -30,7 +31,7 @@ contract Faucet is Mortal {
     receive() external payable {}
 
     // Give out ether to anyone who asks
-    function withdraw(uint withdraw_amount) public {
+    function withdraw(uint withdraw_amount, address recipiant) public {
         // Limit withdrawal amount
         require(withdraw_amount <= 0.1 ether);
 
@@ -40,7 +41,7 @@ contract Faucet is Mortal {
         );
 
         // Send the amount to the address that requested it
-        msg.sender.transfer(withdraw_amount);
+        payable(recipiant).transfer(withdraw_amount);
     }
 }
 

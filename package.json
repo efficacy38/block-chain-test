@@ -16,7 +16,7 @@
         "web3": "^1.9.0"
     },
     "devDependencies": {
-        "@truffle/hdwallet-provider": "^2.1.9",
+        "@truffle/hdwallet-provider": "^1.7.0",
         "@vitejs/plugin-vue": "^4.0.0",
         "@vitejs/plugin-vue-jsx": "^3.0.0",
         "dotenv": "^16.0.3",
