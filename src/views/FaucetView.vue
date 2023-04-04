@@ -4,7 +4,9 @@
             class="row justify-content-center align-items-start text-center pt-5"
         >
             <h1 class="text-white fw-light lh-1 mb-5">JERRY'S FAUCET</h1>
-            <div class="col-7 card border-0 shadow rounded-xs py-3">
+            <div
+                class="col-12 col-md-9 col-lg-7 card border-0 shadow rounded-xs py-3"
+            >
                 <div class="row">
                     <div
                         class="col m-3 w-100 alert alert-primary"
@@ -20,6 +22,7 @@
                             class="form-control item"
                             placeholder="your wallet address"
                             v-model="recipient"
+                            @change="changeRecipientHandler"
                         />
                     </div>
                     <div class="col-3">
@@ -30,31 +33,35 @@
                         >
                             Send the Eth
                         </button>
+
+                        <!-- FIXME: add the loading spainner -->
+                        <div v-if="loading">Loading!!!</div>
                     </div>
                 </div>
                 <hr />
-                <div>
+                <div class="overflow-auto">
                     <h3>Your transations</h3>
                     <table class="table text-start">
                         <thead>
                             <tr>
-                                <th scope="col" class="col-10">transation</th>
-                                <th scope="col" class="col-2">time</th>
+                                <th scope="col">transation</th>
+                                <th scope="col">time</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody v-if="!loading">
                             <tr
                                 v-for="transation in formatedTransations"
                                 :key="transation.blockHash"
                             >
-                                <th scope="row">
+                                <td>
                                     <a
+                                        class="text-nowrap"
                                         :href="`https://sepolia.etherscan.io/tx/${transation.blockHash}`"
                                         target="_blank"
                                         >{{ transation.blockHash }}</a
                                     >
-                                </th>
-                                <td>
+                                </td>
+                                <td class="text-nowrap">
                                     {{ transation.date }}
                                 </td>
                             </tr>
@@ -65,6 +72,24 @@
         </div>
     </div>
 </template>
+
+<style scoped>
+.table {
+    table-layout: fixed; /* 表格和欄寬將根據所給定的寬度來顯示*/
+    min-width: 10px;
+}
+
+thead th:first-child,
+tbody td:first-child {
+    overflow: hidden;
+    width: 10px;
+}
+
+thead th:nth-child(2),
+tbody td:nth-child(2) {
+    width: 20%;
+}
+</style>
 
 <script>
 import Web3 from "web3";
@@ -83,12 +108,13 @@ export default {
             transations: [],
             formatedTransations: [],
             recipient: "",
+            loading: false,
         };
     },
 
     mounted() {
         this.connect();
-        window.setInterval(this.formatTransations, 3000);
+        window.setInterval(this.formatTransations, 1000);
     },
 
     unmounted() {
@@ -143,12 +169,14 @@ export default {
         },
 
         formatTransations() {
-            this.formatedTransations = this.transations.map((trans) => {
-                return {
-                    ...trans,
-                    date: moment(trans.date).fromNow(),
-                };
-            });
+            if (this.transations) {
+                this.formatedTransations = this.transations.map((trans) => {
+                    return {
+                        ...trans,
+                        date: moment(trans.date).fromNow(),
+                    };
+                });
+            }
         },
 
         appendTransation(blockHash) {
@@ -177,6 +205,73 @@ export default {
                 .catch((err) => {
                     console.error(err);
                 });
+        },
+
+        async changeRecipientHandler() {
+            if (!Web3.utils.isAddress(this.recipient)) return;
+            this.loading = true;
+            await this.getWithdrawal(this.recipient)
+                .then((events) =>
+                    events.map((event) => ({
+                        blockHash: event.blockHash,
+                        date: new Date(event.returnValues.timestamp * 1000),
+                    }))
+                )
+                .then((events) => (this.transations = events))
+                .finally((events) => {
+                    console.log(events);
+                    // this.formatTransations();
+                    this.loading = false;
+                });
+            // FIXME: subscribe not working
+            // this.subscribeWithdrawal(this.recipient);
+        },
+
+        async subscribeWithdrawal(address) {
+            const networkId = await this.web3.eth.net.getId();
+            // FaucetContract.clearSubscriptions();
+            console.log({
+                address: FaucetBuild.networks[networkId].address,
+                topics: [
+                    Web3.utils.sha3("Withdrawal(address,uint256,uint256)"),
+                    Web3.utils.padLeft(address, 64),
+                ],
+            });
+            this.web3.eth
+                .subscribe(
+                    "Withdrawal"
+                    //     {
+                    //     address: FaucetBuild.networks[networkId].address,
+                    //     topics: [
+                    //         Web3.utils.sha3("Withdrawal(address,uint256,uint256)"),
+                    //         Web3.utils.padLeft(address, 64),
+                    //     ],
+                    // }
+                )
+                .then((res) => {
+                    console.log(res);
+                });
+        },
+
+        async getWithdrawal(address) {
+            const networkId = await this.web3.eth.net.getId();
+            const FaucetContract = new this.web3.eth.Contract(
+                FaucetBuild.abi,
+                FaucetBuild.networks[networkId].address
+            );
+            // console.log(FaucetContract.getPastEvent('Withdrawal'))
+            if (!Web3.utils.isAddress(address)) return;
+
+            // console.log(Web3.utils.padLeft(this.recipient, 64));
+            return FaucetContract.getPastEvents("Withdrawal", {
+                fromBlock: 0,
+                // filter: {to: this.recipient},
+                toBlock: "latest",
+                topics: [
+                    Web3.utils.sha3("Withdrawal(address,uint256,uint256)"),
+                    Web3.utils.padLeft(address, 64),
+                ],
+            });
         },
     },
 };
