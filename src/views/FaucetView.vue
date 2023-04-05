@@ -14,8 +14,13 @@
                     >
                         {{ this.message }}
                     </div>
+                    <div
+                        class="col m-3 w-100 alert alert-primary"
+                        v-if="isLoading"
+                    >
+                        Loading!!
+                    </div>
                     <!-- FIXME: add the loading spainner -->
-                    <div v-if="isLoading">Loading!!!</div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-9">
@@ -39,10 +44,10 @@
                     </div>
                 </div>
                 <hr />
+                <h3>Your transactions</h3>
                 <div class="overflow-auto">
-                    <h3>Your transactions</h3>
                     <table class="table text-start">
-                        <thead>
+                        <thead class="sticky-top top-0 bg-white">
                             <tr>
                                 <th scope="col">transation</th>
                                 <th scope="col">time</th>
@@ -75,7 +80,7 @@
 
 <style scoped>
 .mycard {
-    max-height: 45rem;
+    max-height: 40rem;
 }
 
 .table {
