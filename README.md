@@ -1,15 +1,24 @@
 # block-chain-learn
 
-This template should help get you started developing with Vue 3 in Vite.
+This is the exercise of NCNU block-chain Course.
 
 ## Check it no github page
 [My Faucet](http://efficacy38.me/block-chain-test)
 
 ## Project Setup
-
-```sh
-npm install
-```
+- deploy smart contract
+    ```sh
+    cd ./truffle
+    # this is for testing env
+    truffle migrate --network development
+    # this is for sepolia test net
+    truffle migrate --network sepolia
+    ```
+- install dependency
+    ```sh
+    npm install
+    npm install --dev
+    ```
 
 ### Compile and Hot-Reload for Development
 
