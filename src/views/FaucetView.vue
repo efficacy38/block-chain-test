@@ -36,7 +36,7 @@
                         <button
                             type="button"
                             class="btn btn-primary w-100"
-                            @click="withdarwHandler"
+                            @click="withdrawHandler"
                             :disabled="isTransactionRun"
                         >
                             Send the Eth
@@ -104,27 +104,30 @@ tbody td:nth-child(2) {
 
 <script>
 import Web3 from "web3";
-import FaucetBuild from "./../../truffle/build/contracts/Faucet.json";
 import moment from "moment";
+import {
+    init,
+    withdraw,
+    getWithdrawal,
+    subscribeWithdrawal,
+    unSubscribeWithdrawal,
+} from "../web3Provider.js";
 
 export default {
     data() {
         return {
-            // FIXME: Provider URL is not worked right now
-            web3: null,
-            accounts: [],
-            FaucetContract: null,
             message: "",
             transactions: [],
             formatedTransations: [],
             recipient: "",
             isLoading: false,
             isTransactionRun: false,
+            withdrawalListener: null,
         };
     },
 
     mounted() {
-        this.connect();
+        init();
         window.setInterval(this.formatTransations, 1000);
     },
 
@@ -133,40 +136,6 @@ export default {
     },
 
     methods: {
-        async connect() {
-            let provider = window.ethereum;
-
-            if (typeof provider !== "undefined") {
-                // MetaMask is installed
-
-                await provider
-                    .request({ method: "eth_requestAccounts" })
-                    .then((accounts) => {
-                        this.accounts = accounts;
-                        console.log(`current account is ${this.accounts[0]}`);
-                    })
-                    .catch((err) => {
-                        console.error(err);
-                        return;
-                    });
-
-                window.ethereum.on("accountsChanged", function (accounts) {
-                    this.accounts = accounts;
-                    console.log(
-                        `current account changed to ${this.accounts[0]}`
-                    );
-                });
-            }
-
-            // FIXME: current only support metamask provider
-            this.web3 = new Web3();
-            this.web3.setProvider(provider);
-        },
-
-        async getBalance(address) {
-            return this.web3.eth.getBalance(address);
-        },
-
         formatTransations() {
             if (this.transactions) {
                 this.formatedTransations = this.transactions
@@ -184,34 +153,10 @@ export default {
             }
         },
 
-        async withdraw(amount, address, callbacks = {}) {
-            const networkId = await this.web3.eth.net.getId();
-            const FaucetContract = new this.web3.eth.Contract(
-                FaucetBuild.abi,
-                FaucetBuild.networks[networkId].address
-            );
-
-            const { onSent, onReceipt, onConfirmation, onError } = callbacks;
-
-            // can't direct return promiEvent via async function(it would return Promise directly),
-            // this would be fixed at web3.js 2.0
-            // https://github.com/web3/web3.js/issues/1547
-            const contract = FaucetContract.methods
-                .withdraw(Web3.utils.toWei(amount, "ether"), address)
-                .send({ from: this.accounts[0] });
-
-            if (onSent) contract.once("sent", onSent);
-            if (onReceipt) contract.once("receipt", onReceipt);
-            if (onConfirmation) contract.once("confirmation", onConfirmation);
-            if (onError) contract.once("error", onError);
-
-            return contract;
-        },
-
-        async withdarwHandler() {
+        async withdrawHandler() {
             const amount = "0.01";
             this.isTransactionRun = true;
-            this.withdraw(amount, this.recipient, {
+            withdraw(amount, this.recipient, {
                 onSent: () => {
                     this.message = "send this contract";
                 },
@@ -234,82 +179,24 @@ export default {
 
         async changeRecipientHandler() {
             if (!Web3.utils.isAddress(this.recipient)) return;
+            if (this.withdrawalListener)
+                unSubscribeWithdrawal(this.withdrawalListener);
 
             this.isLoading = true;
-            await this.getWithdrawal(this.recipient)
+            await getWithdrawal(this.recipient)
                 .then((events) => (this.transactions = events))
                 .catch((err) => {
                     console.error(err);
-                })
-                .finally((events) => {
-                    console.log(events);
                 });
 
             this.formatTransations();
             this.isLoading = false;
 
             // subscribe the withdraw event
-            this.subscribeWithdrawal(this.recipient);
-        },
-
-        async subscribeWithdrawal(address) {
-            const networkId = await this.web3.eth.net.getId();
-            // FaucetContract.clearSubscriptions();
-
-            const FaucetContract = new this.web3.eth.Contract(
-                FaucetBuild.abi,
-                FaucetBuild.networks[networkId].address
-            );
-
-            self = this;
-            return FaucetContract.events
-                .Withdrawal({
-                    address: FaucetBuild.networks[networkId].address,
-                    topics: [
-                        Web3.utils.sha3("Withdrawal(address,uint256,uint256)"),
-                        Web3.utils.padLeft(address, 64),
-                    ],
-
-                    fromBlock: await this.web3.eth.getBlockNumber(),
-                })
-                .on("connected", function (subscriptionId) {
-                    // console.log(subscriptionId);
-                    // console.log("connected")
-                })
-                .on("data", function (event) {
-                    // console.log(event); // same results as the optional callback above
-                    // console.log("data", event);
-                    self.transactions.push(event);
-                })
-                .on("changed", function (event) {
-                    // remove event from local database
-                    console.log("changed");
-                })
-                .on("error", function (error, receipt) {
-                    // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
-                    // console.log(error, receipt); // same results as the optional callback above
-                    console.log("error");
-                });
-        },
-
-        async getWithdrawal(address) {
-            const networkId = await this.web3.eth.net.getId();
-            const FaucetContract = new this.web3.eth.Contract(
-                FaucetBuild.abi,
-                FaucetBuild.networks[networkId].address
-            );
-            // console.log(FaucetContract.getPastEvent('Withdrawal'))
-            if (!Web3.utils.isAddress(address)) return;
-
-            // console.log(Web3.utils.padLeft(this.recipient, 64));
-            return FaucetContract.getPastEvents("Withdrawal", {
-                fromBlock: 0,
-                // filter: {to: this.recipient},
-                toBlock: "latest",
-                topics: [
-                    Web3.utils.sha3("Withdrawal(address,uint256,uint256)"),
-                    Web3.utils.padLeft(address, 64),
-                ],
+            this.withdrawalListener = subscribeWithdrawal(this.recipient, {
+                onData: function (event) {
+                    this.transactions.push(event);
+                }.bind(this),
             });
         },
     },
