@@ -36,6 +36,7 @@
 
                         <!-- FIXME: add the loading spainner -->
                         <div v-if="loading">Loading!!!</div>
+                        <div v-if="doingTransaction">start doing some contract</div>
                     </div>
                 </div>
                 <hr />
@@ -51,14 +52,14 @@
                         <tbody v-if="!loading">
                             <tr
                                 v-for="transation in formatedTransations"
-                                :key="transation.blockHash"
+                                :key="transation.transactionHash"
                             >
                                 <td>
                                     <a
                                         class="text-nowrap"
-                                        :href="`https://sepolia.etherscan.io/tx/${transation.blockHash}`"
+                                        :href="`https://sepolia.etherscan.io/tx/${transation.transactionHash}`"
                                         target="_blank"
-                                        >{{ transation.blockHash }}</a
+                                        >{{ transation.transactionHash }}</a
                                     >
                                 </td>
                                 <td class="text-nowrap">
@@ -76,18 +77,20 @@
 <style scoped>
 .table {
     table-layout: fixed; /* 表格和欄寬將根據所給定的寬度來顯示*/
-    min-width: 10px;
+    min-width: 100px;
 }
 
 thead th:first-child,
 tbody td:first-child {
     overflow: hidden;
-    width: 10px;
+    width: calc(100% - 160px);
+    padding-right: 0;
+    padding-left: 0;
 }
 
 thead th:nth-child(2),
 tbody td:nth-child(2) {
-    width: 20%;
+    width: 160px; /* 10 words width(16px each word) */
 }
 </style>
 
@@ -109,6 +112,7 @@ export default {
             formatedTransations: [],
             recipient: "",
             loading: false,
+            doingTransaction: false,
         };
     },
 
@@ -179,11 +183,6 @@ export default {
             }
         },
 
-        appendTransation(blockHash) {
-            this.transations.push({ blockHash: blockHash, date: new Date() });
-            this.formatTransations();
-        },
-
         async withdraw(amount, address) {
             const networkId = await this.web3.eth.net.getId();
             const FaucetContract = new this.web3.eth.Contract(
@@ -197,14 +196,15 @@ export default {
 
         async withdarwHandler() {
             const amount = "0.01";
+            this.doingTransaction = true;
             this.withdraw(amount, this.recipient)
-                .then((msg) => {
+                .then(async (msg) => {
                     console.log(msg);
-                    this.appendTransation(msg.transactionHash);
+                    await this.changeRecipientHandler();
                 })
                 .catch((err) => {
                     console.error(err);
-                });
+                }).finally(()=>{this.doingTransaction = false});
         },
 
         async changeRecipientHandler() {
@@ -212,15 +212,17 @@ export default {
             this.loading = true;
             await this.getWithdrawal(this.recipient)
                 .then((events) =>
-                    events.map((event) => ({
-                        blockHash: event.blockHash,
-                        date: new Date(event.returnValues.timestamp * 1000),
-                    }))
+                    events
+                        .map((event) => ({
+                            transactionHash: event.transactionHash,
+                            date: new Date(event.returnValues.timestamp * 1000),
+                        }))
+                        .reverse()
                 )
                 .then((events) => (this.transations = events))
                 .finally((events) => {
                     console.log(events);
-                    // this.formatTransations();
+                    this.formatTransations();
                     this.loading = false;
                 });
             // FIXME: subscribe not working
@@ -237,20 +239,36 @@ export default {
                     Web3.utils.padLeft(address, 64),
                 ],
             });
-            this.web3.eth
-                .subscribe(
-                    "Withdrawal"
-                    //     {
-                    //     address: FaucetBuild.networks[networkId].address,
-                    //     topics: [
-                    //         Web3.utils.sha3("Withdrawal(address,uint256,uint256)"),
-                    //         Web3.utils.padLeft(address, 64),
-                    //     ],
-                    // }
-                )
-                .then((res) => {
-                    console.log(res);
-                });
+
+            const FaucetContract = new this.web3.eth.Contract(
+                FaucetBuild.abi,
+                FaucetBuild.networks[networkId].address
+            );
+
+            // function (err, events) {
+            //     console.log(events);
+            //     return events;
+            // }
+            // .on("Withdrawal", function (event) {
+            //     console.log("with", event);
+            // }
+            // )
+            // FaucetContract.events.Withdrawal({
+            //     address: FaucetBuild.networks[networkId].address,
+            //     topics: [
+            //         Web3.utils.sha3("Withdrawal(address,uint256,uint256)"),
+            //         Web3.utils.padLeft(address, 64),
+            //     ],
+            // }).; //.
+            // console.log(FaucetContract.events.Withdrawal(function(err, status) {
+            //     console.log(status);
+            // })
+            // FaucetContract.events.Withdrawal().watch((err, event) => {
+            //     console.log(event)
+            // })
+            // .then((res) => {
+            //     console.log(res);
+            // });
         },
 
         async getWithdrawal(address) {
