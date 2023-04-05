@@ -8,8 +8,8 @@ import { RouterLink, RouterView } from 'vue-router'
     <nav class="navbar navbar-expand-lg navbar-white bg-transparent position-relative">
       <div class="w-100 h-100 bg-white opacity-25 position-absolute z-1"></div>
       <div class="container-fluid d-flex justify-content-center">
-        <RouterLink class="navbar-brand d-flex mx-3" to="/faucet">Faucet</RouterLink>
-        <RouterLink class="navbar-brand d-flex mx-3" to="/faucet">Game</RouterLink>
+        <RouterLink class="navbar-brand d-flex btn bg-dark text-white mx-3" to="/faucet">Faucet</RouterLink>
+        <RouterLink class="navbar-brand d-flex btn bg-dark text-white mx-3" to="/faucet">Game</RouterLink>
       </div>
       <!-- <RouterLink to="/about">About</RouterLink> -->
     </nav>
