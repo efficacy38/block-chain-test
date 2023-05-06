@@ -1,44 +1,25 @@
 <template>
     <div class="container h-100">
-        <div
-            class="row justify-content-center align-items-start text-center pt-5"
-        >
+        <div class="row justify-content-center align-items-start text-center pt-5">
             <h1 class="text-white fw-light lh-1 mb-5">JERRY'S FAUCET</h1>
-            <div
-                class="col-12 col-md-9 col-lg-7 card mycard border-0 shadow rounded-xs py-3"
-            >
+            <div class="col-12 col-md-9 col-lg-7 card mycard border-0 shadow rounded-xs py-3">
                 <div class="row">
-                    <div
-                        class="col m-3 w-100 alert alert-primary"
-                        v-if="isTransactionRun"
-                    >
+                    <div class="col m-3 w-100 alert alert-primary" v-if="isTransactionRun">
                         {{ this.message }}
                     </div>
-                    <div
-                        class="col m-3 w-100 alert alert-primary"
-                        v-if="isLoading"
-                    >
+                    <div class="col m-3 w-100 alert alert-primary" v-if="isLoading">
                         Loading!!
                     </div>
                     <!-- FIXME: add the loading spainner -->
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-9">
-                        <input
-                            type="text"
-                            class="form-control item"
-                            placeholder="your wallet address"
-                            v-model="recipient"
-                            @change="changeRecipientHandler"
-                        />
+                        <input type="text" class="form-control item" placeholder="your wallet address" v-model="recipient"
+                            @change="changeRecipientHandler" />
                     </div>
                     <div class="col-3">
-                        <button
-                            type="button"
-                            class="btn btn-primary w-100"
-                            @click="withdrawHandler"
-                            :disabled="isTransactionRun"
-                        >
+                        <button type="button" class="btn btn-primary w-100" @click="withdrawHandler"
+                            :disabled="isTransactionRun">
                             Send the Eth
                         </button>
                     </div>
@@ -54,17 +35,11 @@
                             </tr>
                         </thead>
                         <tbody v-if="!isLoading">
-                            <tr
-                                v-for="transation in formatedTransations"
-                                :key="transation.transactionHash"
-                            >
+                            <tr v-for="transation in formatedTransations" :key="transation.transactionHash">
                                 <td>
-                                    <a
-                                        class="text-nowrap"
+                                    <a class="text-nowrap"
                                         :href="`https://sepolia.etherscan.io/tx/${transation.transactionHash}`"
-                                        target="_blank"
-                                        >{{ transation.transactionHash }}</a
-                                    >
+                                        target="_blank">{{ transation.transactionHash }}</a>
                                 </td>
                                 <td class="text-nowrap">
                                     {{ transation.date }}
@@ -84,21 +59,30 @@
 }
 
 .table {
-    table-layout: fixed; /* 表格和欄寬將根據所給定的寬度來顯示*/
+    table-layout: fixed;
+    /* 表格和欄寬將根據所給定的寬度來顯示*/
     min-width: 100px;
 }
 
 thead th:first-child,
 tbody td:first-child {
     overflow: hidden;
+    text-overflow: ellipsis;
     width: calc(100% - 160px);
     padding-right: 0;
     padding-left: 0;
 }
 
+tbody td:first-child {
+    color: var(--bs-link-color);
+    text-decoration: underline;
+    border-bottom: 1px solid transparent;
+}
+
 thead th:nth-child(2),
 tbody td:nth-child(2) {
-    width: 160px; /* 10 words width(16px each word) */
+    width: 160px;
+    /* 10 words width(16px each word) */
 }
 </style>
 
