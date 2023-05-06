@@ -5,7 +5,8 @@ let isInitialize = false;
 let FaucetContract;
 let web3, selectAccount;
 
-export {web3, FaucetContract};
+export { web3, FaucetContract };
+
 export const init = async () => {
     let provider = window.ethereum;
 
@@ -13,7 +14,7 @@ export const init = async () => {
         // MetaMask is installed
 
         await provider
-            .request({method: "eth_requestAccounts"})
+            .request({ method: "eth_requestAccounts" })
             .then((accounts) => {
                 selectAccount = accounts[0];
                 console.log(`current account is ${selectAccount}`);
@@ -23,7 +24,7 @@ export const init = async () => {
                 return;
             });
 
-        window.ethereum.on("accountsChanged", function (accounts) {
+        window.ethereum.on("accountsChanged", function(accounts) {
             selectAccount = accounts[0];
             console.log(
                 `current account changed to ${selectAccount}`
@@ -52,14 +53,14 @@ export const withdraw = async (amount, address, callbacks = {}) => {
     if (!isInitialize || !Web3.utils.isAddress(address))
         return;
 
-    const {onSent, onReceipt, onConfirmation, onError} = callbacks;
+    const { onSent, onReceipt, onConfirmation, onError } = callbacks;
 
     // can't direct return promiEvent via async function(it would return Promise directly),
     // this would be fixed at web3.js 2.0
     // https://github.com/web3/web3.js/issues/1547
     const contract = FaucetContract.methods
         .withdraw(Web3.utils.toWei(amount, "ether"), address)
-        .send({from: selectAccount});
+        .send({ from: selectAccount });
 
     if (onSent) contract.once("sent", onSent);
     if (onReceipt) contract.once("receipt", onReceipt);
@@ -88,7 +89,7 @@ export const getWithdrawal = async (address) => {
 
 export const subscribeWithdrawal = (address, callbacks = {}) => {
 
-    const {onData, onChanged, onError} = callbacks;
+    const { onData, onChanged, onError } = callbacks;
     let currentBlockNum;
     web3.eth.getBlockNumber().then(n => currentBlockNum = n + 1);
 

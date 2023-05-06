@@ -9,6 +9,8 @@
         "deploy": "npm run build && node ./deploy/ghpages.js"
     },
     "dependencies": {
+        "@openzeppelin/contracts": "^4.8.3",
+        "@openzeppelin/contracts-upgradeable": "^4.8.3",
         "bootstrap": "^5.2.3",
         "contracts": "file:./truffle/build/contracts",
         "moment": "^2.29.4",
@@ -22,6 +24,10 @@
         "@vitejs/plugin-vue-jsx": "^3.0.0",
         "dotenv": "^16.0.3",
         "gh-pages": "^5.0.0",
+        "node-sass": "^8.0.0",
+        "sass": "^1.62.1",
+        "sass-loader": "^13.2.2",
+        "scss": "^0.2.4",
         "vite": "^4.1.4"
     }
 }

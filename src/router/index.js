@@ -1,15 +1,22 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import FaucetView from '../views/FaucetView.vue'
+import DexView from "../views/DexView.vue"
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
-        path: '/',
-        redirect: (to) => {
-            return { path: '/faucet', query: {q: to.params.searchText}
-            }
+      path: '/',
+      redirect: (to) => {
+        return {
+          path: '/faucet', query: { q: to.params.searchText }
         }
+      }
+    },
+    {
+      path: '/dex',
+      name: 'Dex',
+      component: DexView
     },
     {
       path: '/faucet',
