@@ -1,12 +1,54 @@
 import Web3 from "web3";
 import FaucetBuild from "./../truffle/build/contracts/Faucet.json";
+import JHTokenDexBuild from "./../truffle/build/contracts/JHTokenDEX.json"
+import JHTokenBuild from "./../truffle/build/contracts/JHToken.json"
 
 let isInitialize = false;
-let FaucetContract;
+let FaucetContract, JHTokenDEXContract, JHTokenContract;
 let web3, selectAccount;
 
-export { web3, FaucetContract };
+export { web3, FaucetContract, selectAccount };
 
+// get the token's balance
+
+export const getBalance = async (address) => {
+    return web3.eth.getBalance(address);
+}
+
+export const getJHTBalance = async (address) => {
+    let balance;
+    await JHTokenContract.methods
+        .balanceOf(address)
+        .send({ from: selectAccount },
+            (error, result) => {
+                console.log(result.toString());
+                balance = web3.utils.fromWei(result.toString());
+            }
+        )
+    return balance;
+}
+
+export const isInit = () => {
+    return !!web3;
+}
+
+export const getDexBalance = async () => {
+    const networkId = await web3.eth.net.getId();
+
+    return getBalance(
+        JHTokenDexBuild.networks[networkId].address
+    )
+}
+
+export const getDexJHTBalance = async () => {
+    const networkId = await web3.eth.net.getId();
+
+    return getJHTBalance(
+        JHTokenDexBuild.networks[networkId].address
+    )
+}
+
+// init the web3 provider
 export const init = async () => {
     let provider = window.ethereum;
 
@@ -41,12 +83,19 @@ export const init = async () => {
             FaucetBuild.networks[networkId].address
         );
 
-        isInitialize = true;
-    }
-}
+        JHTokenContract = new web3.eth.Contract(
+            JHTokenBuild.abi,
+            JHTokenBuild.networks[networkId].address
+        );
 
-export const getBalance = async (address) => {
-    return web3.eth.getBalance(address);
+        JHTokenDEXContract = new web3.eth.Contract(
+            JHTokenDexBuild.abi,
+            JHTokenDexBuild.networks[networkId].address
+        );
+
+        isInitialize = true;
+        return true;
+    }
 }
 
 export const withdraw = async (amount, address, callbacks = {}) => {
@@ -114,4 +163,23 @@ export const unSubscribeWithdrawal = (subsciption) => {
     subsciption.off("data")
     subsciption.off("error")
     subsciption.off("changed")
+}
+
+// exchange the coins
+
+export const buyJHT = (amount) => {
+    JHTokenDEXContract
+        .methods.buy()
+        .send({ value: web3.utils.toWei(amount, "ether"), from: selectAccount })
+}
+
+export const approveJHT = (amount) => {
+    return JHTokenContract.methods
+        .approve(JHTokenDEXContract.address, web3.utils.toWei(amount, "ether"))
+        .send({ from: selectAccount })
+}
+
+export const sellJHT = (amount) => {
+    JHTokenDEXContract.methods.sell(web3.utils.toWei(amount, "ether"))
+        .send({ from: selectAccount });
 }

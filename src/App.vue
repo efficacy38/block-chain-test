@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import { init } from './web3Provider';
 </script>
 
 <template>
@@ -15,10 +16,25 @@ import { RouterLink, RouterView } from 'vue-router'
       <!-- <RouterLink to="/about">About</RouterLink> -->
     </nav>
     <div class="container">
-      <RouterView />
+      <RouterView v-if="isInit" />
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      isInit: false
+    }
+  }, mounted() {
+    init().then((i) => {
+      this.isInit = true;
+      console.log(this.isInit)
+    });
+  }
+}
+</script>
 
 <style>
 .stripe {

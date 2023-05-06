@@ -53,48 +53,15 @@
     </div>
 </template>
 
-<style scoped>
-.mycard {
-    max-height: 40rem;
-}
-
-.table {
-    table-layout: fixed;
-    /* 表格和欄寬將根據所給定的寬度來顯示*/
-    min-width: 100px;
-}
-
-thead th:first-child,
-tbody td:first-child {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: calc(100% - 160px);
-    padding-right: 0;
-    padding-left: 0;
-}
-
-tbody td:first-child {
-    color: var(--bs-link-color);
-    text-decoration: underline;
-    border-bottom: 1px solid transparent;
-}
-
-thead th:nth-child(2),
-tbody td:nth-child(2) {
-    width: 160px;
-    /* 10 words width(16px each word) */
-}
-</style>
-
 <script>
 import Web3 from "web3";
 import moment from "moment";
 import {
-    init,
     withdraw,
     getWithdrawal,
     subscribeWithdrawal,
     unSubscribeWithdrawal,
+    selectAccount
 } from "../web3Provider.js";
 
 export default {
@@ -111,12 +78,9 @@ export default {
     },
 
     mounted() {
-        init();
-        window.setInterval(this.formatTransations, 1000);
-    },
-
-    unmounted() {
-        window.clearInterval(this.formatTransations);
+        this.recipient = selectAccount;
+        console.log(selectAccount)
+        this.changeRecipientHandler();
     },
 
     methods: {
@@ -186,4 +150,36 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+.mycard {
+    max-height: 40rem;
+}
+
+.table {
+    table-layout: fixed;
+    /* 表格和欄寬將根據所給定的寬度來顯示*/
+    min-width: 100px;
+}
+
+thead th:first-child,
+tbody td:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: calc(100% - 160px);
+    padding-right: 0;
+    padding-left: 0;
+}
+
+tbody td:first-child {
+    color: var(--bs-link-color);
+    text-decoration: underline;
+}
+
+thead th:nth-child(2),
+tbody td:nth-child(2) {
+    width: 160px;
+    /* 10 words width(16px each word) */
+}
+</style>
 
