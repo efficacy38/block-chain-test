@@ -24,8 +24,8 @@ contract Owned {
 contract Mortal is Owned {
     // Contract destructor
     function destroy() public onlyOwner {
-        // selfdestruct(owner);
-        payable(owner).transfer(address(this).balance);
+        selfdestruct(owner);
+        // payable(owner).transfer(address(this).balance);
     }
 }
 
