@@ -17,6 +17,9 @@ import { init } from './web3Provider';
     </nav>
     <div class="container">
       <RouterView v-if="isInit" />
+      <div v-else="isInit">
+        waiting for login / not supported(only supported with metamask)
+      </div>
     </div>
   </div>
 </template>
@@ -29,7 +32,7 @@ export default {
     }
   }, mounted() {
     init().then((i) => {
-      this.isInit = true;
+      this.isInit = i;
       console.log(this.isInit)
     });
   }

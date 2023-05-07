@@ -4,10 +4,11 @@ import JHTokenDexBuild from "./../truffle/build/contracts/JHTokenDEX.json"
 import JHTokenBuild from "./../truffle/build/contracts/JHToken.json"
 
 let isInitialize = false;
-let FaucetContract, JHTokenDEXContract, JHTokenContract;
+let FaucetContract, JHTokenDexContract, JHTokenContract;
 let web3, selectAccount;
+let JHTokenAddress, JHTokenDexAddress;
 
-export { web3, FaucetContract, selectAccount };
+export { web3, FaucetContract, selectAccount, JHTokenAddress, JHTokenDexAddress };
 
 // get the token's balance
 
@@ -16,21 +17,16 @@ export const getBalance = async (address) => {
 }
 
 export const getJHTBalance = async (address) => {
-    let balance;
-    await JHTokenContract.methods
+    let balance = await JHTokenContract.methods
         .balanceOf(address)
-        .send({ from: selectAccount },
-            (error, result) => {
-                console.log(result.toString());
-                balance = web3.utils.fromWei(result.toString());
-            }
-        )
+        .call()
     return balance;
 }
 
-export const isInit = () => {
-    return !!web3;
+export const getAllowance = async (owner) => {
+    return JHTokenContract.methods.allowance(owner, JHTokenDexAddress).call();
 }
+
 
 export const getDexBalance = async () => {
     const networkId = await web3.eth.net.getId();
@@ -45,6 +41,14 @@ export const getDexJHTBalance = async () => {
 
     return getJHTBalance(
         JHTokenDexBuild.networks[networkId].address
+    )
+}
+
+export const getAddress = async (contractBuild) => {
+    const networkId = await web3.eth.net.getId();
+
+    return getJHTBalance(
+        contractBuild.networks[networkId].address
     )
 }
 
@@ -88,20 +92,21 @@ export const init = async () => {
             JHTokenBuild.networks[networkId].address
         );
 
-        JHTokenDEXContract = new web3.eth.Contract(
+        JHTokenDexContract = new web3.eth.Contract(
             JHTokenDexBuild.abi,
             JHTokenDexBuild.networks[networkId].address
         );
 
+        JHTokenAddress = JHTokenBuild.networks[networkId].address;
+        JHTokenDexAddress = JHTokenDexBuild.networks[networkId].address;
         isInitialize = true;
         return true;
+    } else {
+        return false;
     }
 }
 
 export const withdraw = async (amount, address, callbacks = {}) => {
-    if (!isInitialize || !Web3.utils.isAddress(address))
-        return;
-
     const { onSent, onReceipt, onConfirmation, onError } = callbacks;
 
     // can't direct return promiEvent via async function(it would return Promise directly),
@@ -167,19 +172,21 @@ export const unSubscribeWithdrawal = (subsciption) => {
 
 // exchange the coins
 
-export const buyJHT = (amount) => {
-    JHTokenDEXContract
+export const buyJHT = async (amount) => {
+    return JHTokenDexContract
         .methods.buy()
         .send({ value: web3.utils.toWei(amount, "ether"), from: selectAccount })
 }
 
-export const approveJHT = (amount) => {
+export const approveJHT = async (amount) => {
+    const networkId = await web3.eth.net.getId();
+
     return JHTokenContract.methods
-        .approve(JHTokenDEXContract.address, web3.utils.toWei(amount, "ether"))
+        .approve(JHTokenDexBuild.networks[networkId].address, web3.utils.toWei(amount, "ether"))
         .send({ from: selectAccount })
 }
 
-export const sellJHT = (amount) => {
-    JHTokenDEXContract.methods.sell(web3.utils.toWei(amount, "ether"))
+export const sellJHT = async (amount) => {
+    return JHTokenDexContract.methods.sell(web3.utils.toWei(amount, "ether"))
         .send({ from: selectAccount });
 }
