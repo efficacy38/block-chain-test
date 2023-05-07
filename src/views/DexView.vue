@@ -10,15 +10,15 @@
             <div class="card-body">
               <h5 class="card-title text-start">Swap Tokens</h5>
               <div class="w-100 alert alert-primary" v-if="message">
-                {{ this.message }}
+                {{ message }}
               </div>
               <div class="input-group my-3">
                 <input type="text" class="form-control" v-model="swapAmount">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">{{
                   swapDirection == 0 ? "ETH" : "JHT" }}</button>
                 <ul class="dropdown-menu">
-                  <li><span class="dropdown-item" @click="() => { this.swapDirection = 0 }">ETH</span></li>
-                  <li><span class="dropdown-item" @click="() => { this.swapDirection = 1 }">JHT</span></li>
+                  <li><span class="dropdown-item" @click="swapDirection = 0">ETH</span></li>
+                  <li><span class="dropdown-item" @click="swapDirection = 1">JHT</span></li>
                 </ul>
               </div>
 
@@ -29,8 +29,8 @@
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">{{
                   swapDirection == 0 ? "JHT" : "ETH" }}</button>
                 <ul class="dropdown-menu">
-                  <li><span class="dropdown-item" @click="() => { this.swapDirection = 0 }">JHT</span></li>
-                  <li><span class="dropdown-item" @click="() => { this.swapDirection = 1 }">ETH</span></li>
+                  <li><span class="dropdown-item" @click="swapDirection = 0">JHT</span></li>
+                  <li><span class="dropdown-item" @click="swapDirection = 1">ETH</span></li>
                 </ul>
               </div>
 
