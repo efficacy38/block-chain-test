@@ -79,8 +79,9 @@ export default {
 
     mounted() {
         this.recipient = selectAccount;
-        console.log(selectAccount)
         this.changeRecipientHandler();
+        console.log("monitoring");
+        window.setInterval(this.formatTransations, 1000);
     },
 
     methods: {
