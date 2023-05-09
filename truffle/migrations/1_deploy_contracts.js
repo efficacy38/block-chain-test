@@ -2,6 +2,7 @@ var Faucet = artifacts.require("./Faucet.sol");
 var Token = artifacts.require("./Token.sol");
 var JHToken = artifacts.require("./JHToken.sol")
 var JHTokenDEX = artifacts.require("JHTokenDEX")
+var MyNFT = artifacts.require("./MyNFT.sol")
 
 module.exports = function(deployer) {
     deployer.deploy(Faucet).then(async () => {
@@ -19,4 +20,5 @@ module.exports = function(deployer) {
             return JHToken.deployed();
         });
     });
+    deployer.deploy(MyNFT)
 };

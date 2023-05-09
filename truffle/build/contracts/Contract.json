@@ -1,0 +1,229 @@
+{
+  "contractName": "Contract",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/ContractFactory.sol\":\"Contract\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/ContractFactory.sol\":{\"keccak256\":\"0x72535b45271a5e714ae930025723bfe79e281ab8438cb577ab7c8e29e834ad57\",\"urls\":[\"bzz-raw://589d8c4e33865895b9b6bc6490ed7375e9b551ac0990a0e11c1e96806e370483\",\"dweb:/ipfs/QmVqntXcVo9pZR6m88odzS4cCyowjs3GEvfi185Ra9oGRN\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea264697066735822122076cd5745d616d43649026f8d0ef0a92f56569e3be8c7de16b7b7fefce87aabe164736f6c63430008130033",
+  "deployedBytecode": "0x6080604052600080fdfea264697066735822122076cd5745d616d43649026f8d0ef0a92f56569e3be8c7de16b7b7fefce87aabe164736f6c63430008130033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "159:49:0:-:0;;;183:23;;;;;;;;;;159:49;;;;;;",
+  "deployedSourceMap": "159:49:0:-:0;;;;;",
+  "source": "// ./contracts/ContractFactory.sol\npragma solidity ^0.8.0;\n\ncontract ContractFactory {\n    function createInstance() public {\n        new Contract();\n    }\n}\n\ncontract Contract {\n    constructor() public {}\n}\n",
+  "sourcePath": "/home/efficacy38/Tmp/Course/BlockChain/block-chain-test/truffle/contracts/ContractFactory.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/ContractFactory.sol",
+    "exportedSymbols": {
+      "Contract": [
+        16
+      ],
+      "ContractFactory": [
+        11
+      ]
+    },
+    "id": 17,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "35:23:0"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "ContractFactory",
+        "contractDependencies": [
+          16
+        ],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 11,
+        "linearizedBaseContracts": [
+          11
+        ],
+        "name": "ContractFactory",
+        "nameLocation": "69:15:0",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 9,
+              "nodeType": "Block",
+              "src": "124:31:0",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "id": 6,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "NewExpression",
+                      "src": "134:12:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_creation_nonpayable$__$returns$_t_contract$_Contract_$16_$",
+                        "typeString": "function () returns (contract Contract)"
+                      },
+                      "typeName": {
+                        "id": 5,
+                        "nodeType": "UserDefinedTypeName",
+                        "pathNode": {
+                          "id": 4,
+                          "name": "Contract",
+                          "nameLocations": [
+                            "138:8:0"
+                          ],
+                          "nodeType": "IdentifierPath",
+                          "referencedDeclaration": 16,
+                          "src": "138:8:0"
+                        },
+                        "referencedDeclaration": 16,
+                        "src": "138:8:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Contract_$16",
+                          "typeString": "contract Contract"
+                        }
+                      }
+                    },
+                    "id": 7,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "134:14:0",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Contract_$16",
+                      "typeString": "contract Contract"
+                    }
+                  },
+                  "id": 8,
+                  "nodeType": "ExpressionStatement",
+                  "src": "134:14:0"
+                }
+              ]
+            },
+            "functionSelector": "ad501467",
+            "id": 10,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "createInstance",
+            "nameLocation": "100:14:0",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "114:2:0"
+            },
+            "returnParameters": {
+              "id": 3,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "124:0:0"
+            },
+            "scope": 11,
+            "src": "91:64:0",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 17,
+        "src": "60:97:0",
+        "usedErrors": []
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "Contract",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 16,
+        "linearizedBaseContracts": [
+          16
+        ],
+        "name": "Contract",
+        "nameLocation": "168:8:0",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 14,
+              "nodeType": "Block",
+              "src": "204:2:0",
+              "statements": []
+            },
+            "id": 15,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 12,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "194:2:0"
+            },
+            "returnParameters": {
+              "id": 13,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "204:0:0"
+            },
+            "scope": 16,
+            "src": "183:23:0",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 17,
+        "src": "159:49:0",
+        "usedErrors": []
+      }
+    ],
+    "src": "35:174:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.19+commit.7dd6d404.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.13",
+  "updatedAt": "2023-05-09T07:09:41.962Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
