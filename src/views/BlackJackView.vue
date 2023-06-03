@@ -2,7 +2,7 @@
   <div class="game">
     <!-- <TheStars /> -->
     <TheSidebar />
-    <!-- <TheGameArea /> -->
+    <TheGameArea />
     <!-- <TheMenuButton /> -->
     <!-- <TheTitleScreen v-if="$store.state.isTitleShowing" /> -->
   </div>
@@ -12,11 +12,13 @@
 <script>
 import TheStars from "../components/TheGameArea/TheStars.vue"
 import TheSidebar from "../components/TheSideBar.vue"
+import TheGameArea from "../components/TheGameArea.vue"
 
 export default {
   components: {
     TheStars,
-    TheSidebar
+    TheSidebar,
+    TheGameArea
   },
 }
 </script>

@@ -40,7 +40,7 @@ export default {
 
 @media (max-width: 1199px) {
   .sidebar {
-    position: absolute;
+    // position: absolute;
     transform: translateX(-320px);
   }
 
