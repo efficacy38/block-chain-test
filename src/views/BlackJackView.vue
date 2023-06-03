@@ -1,7 +1,7 @@
 <template>
   <div class="game">
-    <TheStars />
-    <!-- <TheSidebar /> -->
+    <!-- <TheStars /> -->
+    <TheSidebar />
     <!-- <TheGameArea /> -->
     <!-- <TheMenuButton /> -->
     <!-- <TheTitleScreen v-if="$store.state.isTitleShowing" /> -->
@@ -11,12 +11,12 @@
 
 <script>
 import TheStars from "../components/TheGameArea/TheStars.vue"
-// import TheSidebar from "../components/TheSideBar.vue"
+import TheSidebar from "../components/TheSideBar.vue"
 
 export default {
   components: {
     TheStars,
-    // TheSidebar
+    TheSidebar
   },
 }
 </script>
