@@ -4,7 +4,10 @@ import { init } from './web3Provider';
 </script>
 
 <template>
-  <div class="vw-100 vh-100 position-relative">
+  <div class="h-100" v-if="isGame">
+    <RouterView v-if="isInit" />
+  </div>
+  <div class="vw-100 vh-100 position-relative" v-else>
     <div class="stripe"></div>
     <nav class="navbar navbar-expand-lg navbar-white bg-transparent position-relative">
       <div class="w-100 h-100 bg-white opacity-25 position-absolute z-1"></div>
@@ -13,7 +16,6 @@ import { init } from './web3Provider';
         <RouterLink class="navbar-brand d-flex btn bg-dark text-white mx-3" to="/dex">Dex</RouterLink>
         <RouterLink class="navbar-brand d-flex btn bg-dark text-white mx-3" to="/game">Game</RouterLink>
       </div>
-      <!-- <RouterLink to="/about">About</RouterLink> -->
     </nav>
     <div class="container">
       <RouterView v-if="isInit" />
@@ -25,16 +27,23 @@ import { init } from './web3Provider';
 </template>
 
 <script>
+
 export default {
   data() {
     return {
-      isInit: false
+      isInit: false,
     }
   }, mounted() {
+    // init the metamask web3 provider
     init().then((i) => {
       this.isInit = i;
       console.log(this.isInit)
     });
+  },
+  computed: {
+    isGame() {
+      return this.$route.path === '/game' ? true : false
+    }
   }
 }
 </script>
