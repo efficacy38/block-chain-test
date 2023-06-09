@@ -2,6 +2,7 @@ import Web3 from "web3";
 import FaucetBuild from "./../truffle/build/contracts/Faucet.json";
 import JHTokenDexBuild from "./../truffle/build/contracts/JHTokenDEX.json"
 import JHTokenBuild from "./../truffle/build/contracts/JHToken.json"
+import { GAME_STATUS } from "./variables.js"
 
 let isInitialize = false;
 let FaucetContract, JHTokenDexContract, JHTokenContract;
@@ -11,7 +12,6 @@ let JHTokenAddress, JHTokenDexAddress;
 export { web3, FaucetContract, selectAccount, JHTokenAddress, JHTokenDexAddress };
 
 // get the token's balance
-
 export const getBalance = async (address) => {
     return web3.eth.getBalance(address);
 }
@@ -46,7 +46,6 @@ export const getDexJHTBalance = async () => {
 
 export const getAddress = async (contractBuild) => {
     const networkId = await web3.eth.net.getId();
-
     return getJHTBalance(
         contractBuild.networks[networkId].address
     )
@@ -171,7 +170,6 @@ export const unSubscribeWithdrawal = (subsciption) => {
 }
 
 // exchange the coins
-
 export const buyJHT = async (amount) => {
     return JHTokenDexContract
         .methods.buy()
@@ -189,4 +187,75 @@ export const approveJHT = async (amount) => {
 export const sellJHT = async (amount) => {
     return JHTokenDexContract.methods.sell(web3.utils.toWei(amount, "ether"))
         .send({ from: selectAccount });
+}
+
+// game area
+export let cnt = 0;
+const sleep = (ms = 200) => new Promise((r) => setTimeout(r, ms));
+
+// game logic
+
+export async function incCnt() {
+    cnt++;
+}
+
+export async function startNewGame() {
+    cnt = 0;
+    await sleep()
+    return;
+}
+
+export async function getRoundStatus() {
+    if (cnt === 0) return GAME_STATUS.UNDETERMINED;
+    const randN = Math.ceil(Math.random() * 3) - 1;
+    console.log(cnt, randN)
+    return Object.values(GAME_STATUS)[randN];
+}
+
+export async function getPlayerCards() {
+    await sleep()
+    return [
+        { "suit": "S", value: 2, isHidden: false },
+        { "suit": "D", value: 2, isHidden: false },
+    ]
+}
+
+export async function getDealerCards() {
+    await sleep()
+    return [
+        { "suit": "C", value: 3, isHidden: true },
+        { "suit": "H", value: 3, isHidden: false },
+    ]
+}
+
+// start the black jack
+export async function start() {
+    return;
+}
+
+export async function hit() { }
+export async function doubleDown() { }
+export async function stand() { }
+
+
+export const subscribeRoundStatus = async (onGameStatusChange) => {
+
+    let currentBlockNum;
+    web3.eth.getBlockNumber().then(n => currentBlockNum = n + 1);
+    web3.eth.subscribe('log',
+        // FIXME: change the sha3 of the topics
+        {
+            topics: [
+                Web3.utils.sha3("Withdrawal(address,uint256,uint256)"),
+                Web3.utils.padLeft(address, 64),
+            ],
+            fromBlock: currentBlockNum,
+        }, onGameStatusChange
+    )
+
+    return subscription;
+}
+
+export const unSubscribeRoundStatus = (subsciption) => {
+    subsciption.off("data")
 }

@@ -1,18 +1,10 @@
 <template>
   <div class="d-flex justify-content-between control mt-auto mx-auto mb-2">
-    <button class="form-control mx-3">double Down</button>
-    <button class="form-control mx-3">stand</button>
-    <button class="form-control mx-3">hit</button>
+    <button class="form-control mx-3" @click="$emit('double')">double Down</button>
+    <button class="form-control mx-3" @click="$emit('stand')">stand</button>
+    <button class="form-control mx-3" @click="$emit('hit')">hit</button>
   </div>
 </template>
-
-<script>
-
-export default {
-  components: {
-  }
-}
-</script>
 
 <style lang="scss" scoped>
 .control {
