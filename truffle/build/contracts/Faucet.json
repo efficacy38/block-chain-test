@@ -3600,6 +3600,57 @@
     "version": "0.8.19+commit.7dd6d404.Emscripten.clang"
   },
   "networks": {
+    "1337": {
+      "events": {
+        "0xe1fffcc4923d04b559f4d29a8bfc6cda04eb5b0d3c460751c2402c5c5cc9109c": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "Deposit",
+          "type": "event"
+        },
+        "0xdf273cb619d95419a9cd0ec88123a0538c85064229baa6363788f743fff90deb": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "timestamp",
+              "type": "uint256"
+            }
+          ],
+          "name": "Withdrawal",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xcbdFFc2391B5A302Ca417ed9D1b4Da9314A5Eb0D",
+      "transactionHash": "0x5b062e506bed3b2032809520a14d0dac27a107c4b24840b5ec2354119b575a3a"
+    },
     "5777": {
       "events": {
         "0xe1fffcc4923d04b559f4d29a8bfc6cda04eb5b0d3c460751c2402c5c5cc9109c": {
@@ -3667,8 +3718,8 @@
         }
       },
       "links": {},
-      "address": "0x098B05939283eee6970Ff98E96eFe7454Bd24c59",
-      "transactionHash": "0xb6330b4684ee605780de6650e3607929a5a60fa6937e8d8f9eb7f03c2611fb7e"
+      "address": "0xA0E238EF8B97B643F7C275cc5d29719ACC75cFee",
+      "transactionHash": "0x3f56f1048217026e4675b3cf3386eb1b7592eecd09d0c7d50844c97c77cd0a3d"
     },
     "11155111": {
       "events": {
@@ -3723,7 +3774,7 @@
     }
   },
   "schemaVersion": "3.4.13",
-  "updatedAt": "2023-05-08T07:22:39.312Z",
+  "updatedAt": "2023-06-10T18:01:10.826Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

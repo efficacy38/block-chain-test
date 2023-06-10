@@ -2,10 +2,11 @@ import Web3 from "web3";
 import FaucetBuild from "./../truffle/build/contracts/Faucet.json";
 import JHTokenDexBuild from "./../truffle/build/contracts/JHTokenDEX.json"
 import JHTokenBuild from "./../truffle/build/contracts/JHToken.json"
+import BlackJackBuild from "./../truffle/build/contracts/BlackJack.json"
 import { GAME_STATUS } from "./variables.js"
 
 let isInitialize = false;
-let FaucetContract, JHTokenDexContract, JHTokenContract;
+let FaucetContract, JHTokenDexContract, JHTokenContract, BlackJackContract;
 let web3, selectAccount;
 let JHTokenAddress, JHTokenDexAddress;
 
@@ -94,6 +95,11 @@ export const init = async () => {
         JHTokenDexContract = new web3.eth.Contract(
             JHTokenDexBuild.abi,
             JHTokenDexBuild.networks[networkId].address
+        );
+
+        BlackJackContract = new web3.eth.Contract(
+            BlackJackBuild.abi,
+            BlackJackBuild.networks[networkId].address
         );
 
         JHTokenAddress = JHTokenBuild.networks[networkId].address;
@@ -194,14 +200,15 @@ export let cnt = 0;
 const sleep = (ms = 200) => new Promise((r) => setTimeout(r, ms));
 
 // game logic
-
-export async function incCnt() {
-    cnt++;
-}
-
 export async function startNewGame() {
-    cnt = 0;
-    await sleep()
+    const networkId = await web3.eth.net.getId();
+    await JHTokenContract.methods
+        .approve(BlackJackBuild.networks[networkId].address, web3.utils.toWei("2", "ether"))
+        .send({ from: selectAccount })
+        .catch((err) => {
+            console.log(err)
+        })
+    await BlackJackContract.methods.play().send({ from: selectAccount })
     return;
 }
 
@@ -233,25 +240,47 @@ export async function start() {
     return;
 }
 
-export async function hit() { }
-export async function doubleDown() { }
-export async function stand() { }
+export async function hit() {
+    await BlackJackContract.methods
+        .hit()
+        .send({ from: selectAccount });
+}
+export async function doubleDown() {
+    await BlackJackContract.methods
+        .doubleDown()
+        .send({ from: selectAccount });
+}
+export async function stand() {
+    await BlackJackContract.methods
+        .stand()
+        .send({ from: selectAccount });
+}
 
 
-export const subscribeRoundStatus = async (onGameStatusChange) => {
+export const subscribeRoundStatus = async (callbacks = {}) => {
 
-    let currentBlockNum;
-    web3.eth.getBlockNumber().then(n => currentBlockNum = n + 1);
-    web3.eth.subscribe('log',
-        // FIXME: change the sha3 of the topics
+    let currentBlockNum = await web3.eth.getBlockNumber().then(n => n + 1);
+    const { onData, onChanged, onError } = callbacks;
+
+    console.log('123', {
+        topics: [
+            Web3.utils.sha3("status(uint256,uint256,string)"),
+        ],
+        fromBlock: currentBlockNum,
+    }
+    )
+    let subscription = web3.eth.subscribe('logs',
         {
             topics: [
-                Web3.utils.sha3("Withdrawal(address,uint256,uint256)"),
-                Web3.utils.padLeft(address, 64),
+                Web3.utils.sha3("status(uint256,uint256,string)"),
             ],
             fromBlock: currentBlockNum,
-        }, onGameStatusChange
+        }
     )
+
+    if (onData) subscription.on("data", onData);
+    if (onChanged) subscription.on("changed", onChanged);
+    if (onError) subscription.on("error", onError);
 
     return subscription;
 }

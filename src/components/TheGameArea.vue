@@ -18,7 +18,8 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Make a New Game?</h5>
+            <h5 class="modal-title" id="exampleModalLabel"><span v-if="roundStatus !== 'undeterminted'">You {{
+              roundStatus }}. </span>Make a New Game?</h5>
           </div>
           <div class="modal-body">
             <div>click New Game to play another game</div>
@@ -40,13 +41,13 @@
 import TheControl from "./TheGameArea/TheControl.vue"
 import PlayingCard from "./TheGameArea/GameHand/PlayingCard.vue"
 import { GAME_STATUS } from "../variables.js"
-import { getRoundStatus, startNewGame, getPlayerCards, getDealerCards, incCnt, hit, stand, doubleDown } from "../web3Provider.js"
+import { web3, getRoundStatus, startNewGame, getPlayerCards, getDealerCards, hit, stand, doubleDown, unSubscribeRoundStatus, subscribeRoundStatus } from "../web3Provider.js"
 
 export default {
   data() {
     return {
       isModalOpen: true,
-      roundStatus: "",
+      roundStatus: GAME_STATUS.UNDETERMINED,
       dealer: {
         cards: []
       },
@@ -61,7 +62,7 @@ export default {
   },
   methods: {
     async startGameUI() {
-      startNewGame()
+      await startNewGame()
       this.isModalOpen = false;
       this.roundStatus = await getRoundStatus();
     },
@@ -90,10 +91,6 @@ export default {
       if (this.roundStatus !== GAME_STATUS.UNDETERMINED) {
         this.toggleNewGameModal()
       }
-
-      // FIXME: DELETE THIS
-      incCnt()
-      // FIXME: DELETE THIS
     },
     async updateCards() {
       [this.player.cards, this.dealer.cards] = await Promise.all([getPlayerCards(), getDealerCards()]);
@@ -101,7 +98,17 @@ export default {
   },
   async mounted() {
     this.updateCards();
-    this.roundStatus = await getRoundStatus();
+    subscribeRoundStatus({
+      onData: function (rawEvent) {
+        let event = web3.eth.abi.decodeParameters(['uint', 'uint', 'string'], rawEvent.data);
+        console.log(event)
+        let round = event[0], step = event[1];
+        this.roundStatus = event[2];
+        if (this.roundStatus !== GAME_STATUS.UNDETERMINED) {
+          this.toggleNewGameModal()
+        }
+      }.bind(this)
+    })
   }
 }
 </script>
