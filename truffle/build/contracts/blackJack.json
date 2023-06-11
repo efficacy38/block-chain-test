@@ -13,9 +13,9 @@
       "type": "receive"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"destroy\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/BlackJack.sol\":\"blackJack\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/token/ERC20/ERC20.sol\":{\"keccak256\":\"0x4ffc0547c02ad22925310c585c0f166f8759e2648a09e9b489100c42f15dd98d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://15f52f51413a9de1ff191e2f6367c62178e1df7806d7880fe857a98b0b66253d\",\"dweb:/ipfs/QmaQG1fwfgUt5E9nu2cccFiV47B2V78MM1tCy1qB7n4MsH\"]},\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x9750c6b834f7b43000631af5cc30001c5f547b3ceb3635488f140f60e897ea6b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5a7d5b1ef5d8d5889ad2ed89d8619c09383b80b72ab226e0fe7bde1636481e34\",\"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr\"]},\"@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol\":{\"keccak256\":\"0x0d19410453cda55960a818e02bd7c18952a5c8fe7a3036e81f0d599f34487a7b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4c0f62d3d5bef22b5ca00cc3903e7de6152cb68d2d22401a463f373cda54c00f\",\"dweb:/ipfs/QmSfzjZux7LC7NW2f7rjCXTHeFMUCWERqDkhpCTBy7kxTe\"]},\"@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol\":{\"keccak256\":\"0x8de418a5503946cabe331f35fe242d3201a73f67f77aaeb7110acb1f30423aca\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5a376d3dda2cb70536c0a45c208b29b34ac560c4cb4f513a42079f96ba47d2dd\",\"dweb:/ipfs/QmZQg6gn1sUpM8wHzwNvSnihumUCAhxD119MpXeKp8B9s8\"]},\"@openzeppelin/contracts/utils/Context.sol\":{\"keccak256\":\"0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92\",\"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3\"]},\"project:/contracts/BlackJack.sol\":{\"keccak256\":\"0xf328a7da69054ca2473fe64022b8458e386776dd664e787a5996bfbb443708fa\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a7333f88363e6c8624a2bfeb1210953f0429effb7fb73044b3a59bf32c760173\",\"dweb:/ipfs/QmZWcqKSMthVs1igzsNfr8CN3QUF7qWF2ErLupCeb6SSHW\"]},\"project:/contracts/Faucet.sol\":{\"keccak256\":\"0xc5090496bd2d14c7b273369fb16bd7130e0e3662744ff0d8f52bed3a346c1453\",\"license\":\"CC-BY-SA-4.0\",\"urls\":[\"bzz-raw://7e74310dd985c0f4389a35ff1531832ad0ce82e9a9baf88e9546a18c859ceec3\",\"dweb:/ipfs/QmUTAfQWEXPtp2ZKRNUBS7kT87LpreCHPmwYyN68v6uMEm\"]},\"project:/contracts/JHToken.sol\":{\"keccak256\":\"0xa3f044f05e0342de23899c8be23aab786a5f39e8e210afaf80943a11d76cb14e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://26f0ef0a6c3773867f44c1ed29b7f881b32a1c60df8b5b66a7f6bd24d6839350\",\"dweb:/ipfs/QmY51SYccwthzicsoTxL9nocNVHfvxEAk2MNkk1SiXuG3c\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b50336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506101e5806100606000396000f3fe6080604052600436106100225760003560e01c806383197ef01461002e57610029565b3661002957005b600080fd5b34801561003a57600080fd5b50610043610045565b005b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16146100d3576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004016100ca9061018f565b60405180910390fd5b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16ff5b600082825260208201905092915050565b7f4f6e6c792074686520636f6e7472616374206f776e65722063616e2063616c6c60008201527f20746869732066756e6374696f6e000000000000000000000000000000000000602082015250565b6000610179602e8361010c565b91506101848261011d565b604082019050919050565b600060208201905081810360008301526101a88161016c565b905091905056fea26469706673582212206e1811915a6db389fb724373d8dc15e4b8bad4e513bc17a0b89bd333e0bf2b2e64736f6c63430008130033",
-  "deployedBytecode": "0x6080604052600436106100225760003560e01c806383197ef01461002e57610029565b3661002957005b600080fd5b34801561003a57600080fd5b50610043610045565b005b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16146100d3576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004016100ca9061018f565b60405180910390fd5b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16ff5b600082825260208201905092915050565b7f4f6e6c792074686520636f6e7472616374206f776e65722063616e2063616c6c60008201527f20746869732066756e6374696f6e000000000000000000000000000000000000602082015250565b6000610179602e8361010c565b91506101848261011d565b604082019050919050565b600060208201905081810360008301526101a88161016c565b905091905056fea26469706673582212206e1811915a6db389fb724373d8dc15e4b8bad4e513bc17a0b89bd333e0bf2b2e64736f6c63430008130033",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"destroy\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/BlackJack.sol\":\"blackJack\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/token/ERC20/ERC20.sol\":{\"keccak256\":\"0x4ffc0547c02ad22925310c585c0f166f8759e2648a09e9b489100c42f15dd98d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://15f52f51413a9de1ff191e2f6367c62178e1df7806d7880fe857a98b0b66253d\",\"dweb:/ipfs/QmaQG1fwfgUt5E9nu2cccFiV47B2V78MM1tCy1qB7n4MsH\"]},\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x9750c6b834f7b43000631af5cc30001c5f547b3ceb3635488f140f60e897ea6b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5a7d5b1ef5d8d5889ad2ed89d8619c09383b80b72ab226e0fe7bde1636481e34\",\"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr\"]},\"@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol\":{\"keccak256\":\"0x0d19410453cda55960a818e02bd7c18952a5c8fe7a3036e81f0d599f34487a7b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4c0f62d3d5bef22b5ca00cc3903e7de6152cb68d2d22401a463f373cda54c00f\",\"dweb:/ipfs/QmSfzjZux7LC7NW2f7rjCXTHeFMUCWERqDkhpCTBy7kxTe\"]},\"@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol\":{\"keccak256\":\"0x8de418a5503946cabe331f35fe242d3201a73f67f77aaeb7110acb1f30423aca\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5a376d3dda2cb70536c0a45c208b29b34ac560c4cb4f513a42079f96ba47d2dd\",\"dweb:/ipfs/QmZQg6gn1sUpM8wHzwNvSnihumUCAhxD119MpXeKp8B9s8\"]},\"@openzeppelin/contracts/utils/Context.sol\":{\"keccak256\":\"0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92\",\"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3\"]},\"project:/contracts/BlackJack.sol\":{\"keccak256\":\"0xc396f559fd56891a2775c529c54097c0c2764ecc4b9274cf17399e9770c1c8b5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://cd459ceb6b4e9df77abd8a7ac4e9d8ac057ad555dbf640100ce816bdb88d665a\",\"dweb:/ipfs/QmWgsBHx31RZdFCdFtun9fRrJVN6BEPHcBT5v5DNWVtnDR\"]},\"project:/contracts/Faucet.sol\":{\"keccak256\":\"0xc5090496bd2d14c7b273369fb16bd7130e0e3662744ff0d8f52bed3a346c1453\",\"license\":\"CC-BY-SA-4.0\",\"urls\":[\"bzz-raw://7e74310dd985c0f4389a35ff1531832ad0ce82e9a9baf88e9546a18c859ceec3\",\"dweb:/ipfs/QmUTAfQWEXPtp2ZKRNUBS7kT87LpreCHPmwYyN68v6uMEm\"]},\"project:/contracts/JHToken.sol\":{\"keccak256\":\"0xa3f044f05e0342de23899c8be23aab786a5f39e8e210afaf80943a11d76cb14e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://26f0ef0a6c3773867f44c1ed29b7f881b32a1c60df8b5b66a7f6bd24d6839350\",\"dweb:/ipfs/QmY51SYccwthzicsoTxL9nocNVHfvxEAk2MNkk1SiXuG3c\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506101e5806100606000396000f3fe6080604052600436106100225760003560e01c806383197ef01461002e57610029565b3661002957005b600080fd5b34801561003a57600080fd5b50610043610045565b005b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16146100d3576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004016100ca9061018f565b60405180910390fd5b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16ff5b600082825260208201905092915050565b7f4f6e6c792074686520636f6e7472616374206f776e65722063616e2063616c6c60008201527f20746869732066756e6374696f6e000000000000000000000000000000000000602082015250565b6000610179602e8361010c565b91506101848261011d565b604082019050919050565b600060208201905081810360008301526101a88161016c565b905091905056fea26469706673582212208c9103c70c558f6a1648642ad328f1b171c63fca8a8109ab75d8b7efe80fb42d64736f6c63430008130033",
+  "deployedBytecode": "0x6080604052600436106100225760003560e01c806383197ef01461002e57610029565b3661002957005b600080fd5b34801561003a57600080fd5b50610043610045565b005b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16146100d3576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004016100ca9061018f565b60405180910390fd5b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16ff5b600082825260208201905092915050565b7f4f6e6c792074686520636f6e7472616374206f776e65722063616e2063616c6c60008201527f20746869732066756e6374696f6e000000000000000000000000000000000000602082015250565b6000610179602e8361010c565b91506101848261011d565b604082019050919050565b600060208201905081810360008301526101a88161016c565b905091905056fea26469706673582212208c9103c70c558f6a1648642ad328f1b171c63fca8a8109ab75d8b7efe80fb42d64736f6c63430008130033",
   "immutableReferences": {},
   "generatedSources": [],
   "deployedGeneratedSources": [
@@ -497,15 +497,15 @@
       "name": "#utility.yul"
     }
   ],
-  "sourceMap": "2532:101:5:-:0;;;;;;;;;;;;;256:10:6;240:5;;:27;;;;;;;;;;;;;;;;;;2532:101:5;;;;;;",
-  "deployedSourceMap": "2532:101:5:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;534:131:6;;;;;;;;;;;;;:::i;:::-;;;377:5;;;;;;;;;;363:19;;:10;:19;;;342:112;;;;;;;;;;;;:::i;:::-;;;;;;;;;593:5:::1;::::0;::::1;;;;;;;;580:19;;;7:169:11::0;91:11;125:6;120:3;113:19;165:4;160:3;156:14;141:29;;7:169;;;;:::o;182:233::-;322:34;318:1;310:6;306:14;299:58;391:16;386:2;378:6;374:15;367:41;182:233;:::o;421:366::-;563:3;584:67;648:2;643:3;584:67;:::i;:::-;577:74;;660:93;749:3;660:93;:::i;:::-;778:2;773:3;769:12;762:19;;421:366;;;:::o;793:419::-;959:4;997:2;986:9;982:18;974:26;;1046:9;1040:4;1036:20;1032:1;1021:9;1017:17;1010:47;1074:131;1200:4;1074:131;:::i;:::-;1066:139;;793:419;;;:::o",
-  "source": "// SPDX-License-Identifier: MIT\nimport \"./JHToken.sol\";\n\npragma solidity ^0.8.7;\n\ncontract BlackJack {\n    uint256[52] deck;\n    uint256[] PlayerHand;\n    uint256[] DealerHand;\n\n    struct Game {\n        uint256 round;\n        uint256 step;\n        string status;\n        uint256 testCnt;\n    }\n\n    Game game;\n    JHToken public JHTokenStore;\n\n    event status(uint256 round, uint256 step, string status);\n\n    constructor(address JHTokenDEXAddress) {\n        JHTokenStore = JHToken(JHTokenDEXAddress);\n    }\n\n    function lockEstate() public {\n        // check ether is enough\n        uint256 allowance = JHTokenStore.allowance(msg.sender, address(this));\n        require(\n            allowance >= 2,\n            \"You need to set 2 token to allowance at least\"\n        );\n        JHTokenStore.transferFrom(msg.sender, address(this), 2e18);\n    }\n\n    function releaseEstate(uint256 amount) internal {\n        JHTokenStore.transfer(msg.sender, amount);\n    }\n\n    function returnTenToken(address target) public {\n        JHTokenStore.transfer(target, 1e19);\n    }\n\n    function play() external {\n        //初始化\n        lockEstate();\n\n        game = Game(0, 0, \"undeterminted\", 0);\n    }\n\n    function fakeEnd() internal {\n        emit status(game.round, game.step, \"win\");\n        game.round++;\n    }\n\n    function deal() internal {}\n\n    function hit() public {\n        game.testCnt++;\n        if (game.testCnt == 1) {\n            fakeEnd();\n        }\n    }\n\n    function stand() public {\n        game.testCnt++;\n        if (game.testCnt == 3) {\n            fakeEnd();\n        }\n    }\n\n    function doubleDown() public {\n        game.testCnt++;\n        if (game.testCnt == 4) {\n            fakeEnd();\n        }\n    }\n\n    // function PointOf(uint256[] storage Hand) internal view returns (uint256) {\n    //     uint256 A = 0;\n    //     uint256 point = 0;\n    //     for (uint256 i = 0; i < Hand.length; i++) {\n    //         if (Hand[i] % 13 == 1)\n    //             //這張是A\n    //             A++;\n    //         point += 11;\n    //         if (Hand[i] % 13 >= 9)\n    //             //這張10分\n    //             point += 10;\n    //         else point += ((Hand[i] % 13) + 1); //數字多少就+幾分\n    //     }\n    //     while (\n    //         point > 21 //分數超過21，有A的話要適當的當成1分\n    //     ) {\n    //         if (A > 0) {\n    //             A--;\n    //             point -= 10;\n    //         }\n    //     }\n    //     if (point > 21) return 0;\n    //     return point;\n    // }\n}\n\ncontract blackJack is Mortal {\n    // uint256 exchangeRate = 10;\n\n    receive() external payable {}\n}\n",
+  "sourceMap": "2593:101:5:-:0;;;;;;;;;;;;;256:10:6;240:5;;:27;;;;;;;;;;;;;;;;;;2593:101:5;;;;;;",
+  "deployedSourceMap": "2593:101:5:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;534:131:6;;;;;;;;;;;;;:::i;:::-;;;377:5;;;;;;;;;;363:19;;:10;:19;;;342:112;;;;;;;;;;;;:::i;:::-;;;;;;;;;593:5:::1;::::0;::::1;;;;;;;;580:19;;;7:169:11::0;91:11;125:6;120:3;113:19;165:4;160:3;156:14;141:29;;7:169;;;;:::o;182:233::-;322:34;318:1;310:6;306:14;299:58;391:16;386:2;378:6;374:15;367:41;182:233;:::o;421:366::-;563:3;584:67;648:2;643:3;584:67;:::i;:::-;577:74;;660:93;749:3;660:93;:::i;:::-;778:2;773:3;769:12;762:19;;421:366;;;:::o;793:419::-;959:4;997:2;986:9;982:18;974:26;;1046:9;1040:4;1036:20;1032:1;1021:9;1017:17;1010:47;1074:131;1200:4;1074:131;:::i;:::-;1066:139;;793:419;;;:::o",
+  "source": "// SPDX-License-Identifier: MIT\nimport \"./JHToken.sol\";\n\npragma solidity ^0.8.7;\n\ncontract BlackJack {\n    uint256[52] deck;\n    uint256[] PlayerHand;\n    uint256[] DealerHand;\n\n    struct Game {\n        uint256 round;\n        uint256 step;\n        string status;\n        uint256 testCnt;\n    }\n\n    Game game;\n    JHToken public JHTokenStore;\n\n    event status(uint256 round, uint256 step, string status);\n\n    constructor(address JHTokenDEXAddress) {\n        JHTokenStore = JHToken(JHTokenDEXAddress);\n    }\n\n    function lockEstate() public {\n        // check ether is enough\n        uint256 allowance = JHTokenStore.allowance(msg.sender, address(this));\n        require(\n            allowance >= 2,\n            \"You need to set 2 token to allowance at least\"\n        );\n        JHTokenStore.transferFrom(msg.sender, address(this), 2e18);\n    }\n\n    function releaseEstate(uint256 amount) internal {\n        JHTokenStore.transfer(msg.sender, amount);\n    }\n\n    function returnTenToken(address target) public {\n        JHTokenStore.transfer(target, 1e19);\n    }\n\n    function play() external {\n        //初始化\n        lockEstate();\n\n        game = Game(0, 0, \"undeterminted\", 0);\n        emit status(game.round, game.step, \"undeterminted\");\n    }\n\n    function fakeEnd() internal {\n        emit status(game.round, game.step, \"win\");\n        game.round++;\n    }\n\n    function deal() internal {}\n\n    function hit() public {\n        game.testCnt++;\n        if (game.testCnt == 1) {\n            fakeEnd();\n        }\n    }\n\n    function stand() public {\n        game.testCnt++;\n        if (game.testCnt == 3) {\n            fakeEnd();\n        }\n    }\n\n    function doubleDown() public {\n        game.testCnt++;\n        if (game.testCnt == 4) {\n            fakeEnd();\n        }\n    }\n\n    // function PointOf(uint256[] storage Hand) internal view returns (uint256) {\n    //     uint256 A = 0;\n    //     uint256 point = 0;\n    //     for (uint256 i = 0; i < Hand.length; i++) {\n    //         if (Hand[i] % 13 == 1)\n    //             //這張是A\n    //             A++;\n    //         point += 11;\n    //         if (Hand[i] % 13 >= 9)\n    //             //這張10分\n    //             point += 10;\n    //         else point += ((Hand[i] % 13) + 1); //數字多少就+幾分\n    //     }\n    //     while (\n    //         point > 21 //分數超過21，有A的話要適當的當成1分\n    //     ) {\n    //         if (A > 0) {\n    //             A--;\n    //             point -= 10;\n    //         }\n    //     }\n    //     if (point > 21) return 0;\n    //     return point;\n    // }\n}\n\ncontract blackJack is Mortal {\n    // uint256 exchangeRate = 10;\n\n    receive() external payable {}\n}\n",
   "sourcePath": "/home/efficacy38/Tmp/Course/BlockChain/block-chain-test/truffle/contracts/BlackJack.sol",
   "ast": {
     "absolutePath": "project:/contracts/BlackJack.sol",
     "exportedSymbols": {
       "BlackJack": [
-        957
+        965
       ],
       "Context": [
         755
@@ -517,7 +517,7 @@
         708
       ],
       "Faucet": [
-        1075
+        1083
       ],
       "IERC20": [
         664
@@ -526,22 +526,22 @@
         733
       ],
       "JHToken": [
-        1123
+        1131
       ],
       "JHTokenDEX": [
-        1271
+        1279
       ],
       "Mortal": [
-        1006
+        1014
       ],
       "Owned": [
-        993
+        1001
       ],
       "blackJack": [
-        964
+        972
       ]
     },
-    "id": 965,
+    "id": 973,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
@@ -551,8 +551,8 @@
         "id": 757,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 965,
-        "sourceUnit": 1272,
+        "scope": 973,
+        "sourceUnit": 1280,
         "src": "32:23:5",
         "symbolAliases": [],
         "unitAlias": ""
@@ -575,9 +575,9 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 957,
+        "id": 965,
         "linearizedBaseContracts": [
-          957
+          965
         ],
         "name": "BlackJack",
         "nameLocation": "91:9:5",
@@ -590,7 +590,7 @@
             "name": "deck",
             "nameLocation": "119:4:5",
             "nodeType": "VariableDeclaration",
-            "scope": 957,
+            "scope": 965,
             "src": "107:16:5",
             "stateVariable": true,
             "storageLocation": "default",
@@ -642,7 +642,7 @@
             "name": "PlayerHand",
             "nameLocation": "139:10:5",
             "nodeType": "VariableDeclaration",
-            "scope": 957,
+            "scope": 965,
             "src": "129:20:5",
             "stateVariable": true,
             "storageLocation": "default",
@@ -678,7 +678,7 @@
             "name": "DealerHand",
             "nameLocation": "165:10:5",
             "nodeType": "VariableDeclaration",
-            "scope": 957,
+            "scope": 965,
             "src": "155:20:5",
             "stateVariable": true,
             "storageLocation": "default",
@@ -823,7 +823,7 @@
             "name": "Game",
             "nameLocation": "189:4:5",
             "nodeType": "StructDefinition",
-            "scope": 957,
+            "scope": 965,
             "src": "182:112:5",
             "visibility": "public"
           },
@@ -834,7 +834,7 @@
             "name": "game",
             "nameLocation": "305:4:5",
             "nodeType": "VariableDeclaration",
-            "scope": 957,
+            "scope": 965,
             "src": "300:9:5",
             "stateVariable": true,
             "storageLocation": "default",
@@ -872,12 +872,12 @@
             "name": "JHTokenStore",
             "nameLocation": "330:12:5",
             "nodeType": "VariableDeclaration",
-            "scope": 957,
+            "scope": 965,
             "src": "315:27:5",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_JHToken_$1123",
+              "typeIdentifier": "t_contract$_JHToken_$1131",
               "typeString": "contract JHToken"
             },
             "typeName": {
@@ -890,13 +890,13 @@
                   "315:7:5"
                 ],
                 "nodeType": "IdentifierPath",
-                "referencedDeclaration": 1123,
+                "referencedDeclaration": 1131,
                 "src": "315:7:5"
               },
-              "referencedDeclaration": 1123,
+              "referencedDeclaration": 1131,
               "src": "315:7:5",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_JHToken_$1123",
+                "typeIdentifier": "t_contract$_JHToken_$1131",
                 "typeString": "contract JHToken"
               }
             },
@@ -1023,7 +1023,7 @@
                       "referencedDeclaration": 783,
                       "src": "461:12:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_JHToken_$1123",
+                        "typeIdentifier": "t_contract$_JHToken_$1131",
                         "typeString": "contract JHToken"
                       }
                     },
@@ -1055,10 +1055,10 @@
                         "name": "JHToken",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1123,
+                        "referencedDeclaration": 1131,
                         "src": "476:7:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_JHToken_$1123_$",
+                          "typeIdentifier": "t_type$_t_contract$_JHToken_$1131_$",
                           "typeString": "type(contract JHToken)"
                         }
                       },
@@ -1074,13 +1074,13 @@
                       "src": "476:26:5",
                       "tryCall": false,
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_JHToken_$1123",
+                        "typeIdentifier": "t_contract$_JHToken_$1131",
                         "typeString": "contract JHToken"
                       }
                     },
                     "src": "461:41:5",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_JHToken_$1123",
+                      "typeIdentifier": "t_contract$_JHToken_$1131",
                       "typeString": "contract JHToken"
                     }
                   },
@@ -1138,7 +1138,7 @@
               "parameters": [],
               "src": "451:0:5"
             },
-            "scope": 957,
+            "scope": 965,
             "src": "412:97:5",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -1223,7 +1223,7 @@
                             "referencedDeclaration": 4294967268,
                             "src": "650:4:5",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_BlackJack_$957",
+                              "typeIdentifier": "t_contract$_BlackJack_$965",
                               "typeString": "contract BlackJack"
                             }
                           }
@@ -1231,7 +1231,7 @@
                         "expression": {
                           "argumentTypes": [
                             {
-                              "typeIdentifier": "t_contract$_BlackJack_$957",
+                              "typeIdentifier": "t_contract$_BlackJack_$965",
                               "typeString": "contract BlackJack"
                             }
                           ],
@@ -1290,7 +1290,7 @@
                         "referencedDeclaration": 783,
                         "src": "607:12:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_JHToken_$1123",
+                          "typeIdentifier": "t_contract$_JHToken_$1131",
                           "typeString": "contract JHToken"
                         }
                       },
@@ -1479,7 +1479,7 @@
                             "referencedDeclaration": 4294967268,
                             "src": "828:4:5",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_BlackJack_$957",
+                              "typeIdentifier": "t_contract$_BlackJack_$965",
                               "typeString": "contract BlackJack"
                             }
                           }
@@ -1487,7 +1487,7 @@
                         "expression": {
                           "argumentTypes": [
                             {
-                              "typeIdentifier": "t_contract$_BlackJack_$957",
+                              "typeIdentifier": "t_contract$_BlackJack_$965",
                               "typeString": "contract BlackJack"
                             }
                           ],
@@ -1566,7 +1566,7 @@
                         "referencedDeclaration": 783,
                         "src": "782:12:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_JHToken_$1123",
+                          "typeIdentifier": "t_contract$_JHToken_$1131",
                           "typeString": "contract JHToken"
                         }
                       },
@@ -1627,7 +1627,7 @@
               "parameters": [],
               "src": "544:0:5"
             },
-            "scope": 957,
+            "scope": 965,
             "src": "515:332:5",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -1701,7 +1701,7 @@
                         "referencedDeclaration": 783,
                         "src": "911:12:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_JHToken_$1123",
+                          "typeIdentifier": "t_contract$_JHToken_$1131",
                           "typeString": "contract JHToken"
                         }
                       },
@@ -1789,7 +1789,7 @@
               "parameters": [],
               "src": "901:0:5"
             },
-            "scope": 957,
+            "scope": 965,
             "src": "853:106:5",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -1852,7 +1852,7 @@
                         "referencedDeclaration": 783,
                         "src": "1022:12:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_JHToken_$1123",
+                          "typeIdentifier": "t_contract$_JHToken_$1131",
                           "typeString": "contract JHToken"
                         }
                       },
@@ -1942,7 +1942,7 @@
               "parameters": [],
               "src": "1012:0:5"
             },
-            "scope": 957,
+            "scope": 965,
             "src": "965:99:5",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -1950,9 +1950,9 @@
           },
           {
             "body": {
-              "id": 880,
+              "id": 888,
               "nodeType": "Block",
-              "src": "1095:97:5",
+              "src": "1095:158:5",
               "statements": [
                 {
                   "expression": {
@@ -2133,11 +2133,133 @@
                   "id": 879,
                   "nodeType": "ExpressionStatement",
                   "src": "1148:37:5"
+                },
+                {
+                  "eventCall": {
+                    "arguments": [
+                      {
+                        "expression": {
+                          "id": 881,
+                          "name": "game",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 780,
+                          "src": "1207:4:5",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Game_$777_storage",
+                            "typeString": "struct BlackJack.Game storage ref"
+                          }
+                        },
+                        "id": 882,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "1212:5:5",
+                        "memberName": "round",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 770,
+                        "src": "1207:10:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "expression": {
+                          "id": 883,
+                          "name": "game",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 780,
+                          "src": "1219:4:5",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Game_$777_storage",
+                            "typeString": "struct BlackJack.Game storage ref"
+                          }
+                        },
+                        "id": 884,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "1224:4:5",
+                        "memberName": "step",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 772,
+                        "src": "1219:9:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "hexValue": "756e64657465726d696e746564",
+                        "id": 885,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1230:15:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_c2b89b1102413002e62a89e70b6fc47c7e462e0dc85d7c2cf781e3c848bc7d9b",
+                          "typeString": "literal_string \"undeterminted\""
+                        },
+                        "value": "undeterminted"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_c2b89b1102413002e62a89e70b6fc47c7e462e0dc85d7c2cf781e3c848bc7d9b",
+                          "typeString": "literal_string \"undeterminted\""
+                        }
+                      ],
+                      "id": 880,
+                      "name": "status",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 791,
+                      "src": "1200:6:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$_t_uint256_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (uint256,uint256,string memory)"
+                      }
+                    },
+                    "id": 886,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1200:46:5",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 887,
+                  "nodeType": "EmitStatement",
+                  "src": "1195:51:5"
                 }
               ]
             },
             "functionSelector": "93e84cd9",
-            "id": 881,
+            "id": 889,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -2156,44 +2278,44 @@
               "parameters": [],
               "src": "1095:0:5"
             },
-            "scope": 957,
-            "src": "1070:122:5",
+            "scope": 965,
+            "src": "1070:183:5",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "body": {
-              "id": 897,
+              "id": 905,
               "nodeType": "Block",
-              "src": "1226:80:5",
+              "src": "1287:80:5",
               "statements": [
                 {
                   "eventCall": {
                     "arguments": [
                       {
                         "expression": {
-                          "id": 885,
+                          "id": 893,
                           "name": "game",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
                           "referencedDeclaration": 780,
-                          "src": "1248:4:5",
+                          "src": "1309:4:5",
                           "typeDescriptions": {
                             "typeIdentifier": "t_struct$_Game_$777_storage",
                             "typeString": "struct BlackJack.Game storage ref"
                           }
                         },
-                        "id": 886,
+                        "id": 894,
                         "isConstant": false,
                         "isLValue": true,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberLocation": "1253:5:5",
+                        "memberLocation": "1314:5:5",
                         "memberName": "round",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": 770,
-                        "src": "1248:10:5",
+                        "src": "1309:10:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -2201,27 +2323,27 @@
                       },
                       {
                         "expression": {
-                          "id": 887,
+                          "id": 895,
                           "name": "game",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
                           "referencedDeclaration": 780,
-                          "src": "1260:4:5",
+                          "src": "1321:4:5",
                           "typeDescriptions": {
                             "typeIdentifier": "t_struct$_Game_$777_storage",
                             "typeString": "struct BlackJack.Game storage ref"
                           }
                         },
-                        "id": 888,
+                        "id": 896,
                         "isConstant": false,
                         "isLValue": true,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberLocation": "1265:4:5",
+                        "memberLocation": "1326:4:5",
                         "memberName": "step",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": 772,
-                        "src": "1260:9:5",
+                        "src": "1321:9:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -2229,14 +2351,14 @@
                       },
                       {
                         "hexValue": "77696e",
-                        "id": 889,
+                        "id": 897,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "string",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "1271:5:5",
+                        "src": "1332:5:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_stringliteral_0d5fc1ba5bbedbf440033ec8d9ee539021ffff13e02b5c9db44e881a0890dbd2",
                           "typeString": "literal_string \"win\""
@@ -2259,18 +2381,18 @@
                           "typeString": "literal_string \"win\""
                         }
                       ],
-                      "id": 884,
+                      "id": 892,
                       "name": "status",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 791,
-                      "src": "1241:6:5",
+                      "src": "1302:6:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$_t_uint256_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (uint256,uint256,string memory)"
                       }
                     },
-                    "id": 890,
+                    "id": 898,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2279,20 +2401,20 @@
                     "nameLocations": [],
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1241:36:5",
+                    "src": "1302:36:5",
                     "tryCall": false,
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 891,
+                  "id": 899,
                   "nodeType": "EmitStatement",
-                  "src": "1236:41:5"
+                  "src": "1297:41:5"
                 },
                 {
                   "expression": {
-                    "id": 895,
+                    "id": 903,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2300,30 +2422,30 @@
                     "nodeType": "UnaryOperation",
                     "operator": "++",
                     "prefix": false,
-                    "src": "1287:12:5",
+                    "src": "1348:12:5",
                     "subExpression": {
                       "expression": {
-                        "id": 892,
+                        "id": 900,
                         "name": "game",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 780,
-                        "src": "1287:4:5",
+                        "src": "1348:4:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_struct$_Game_$777_storage",
                           "typeString": "struct BlackJack.Game storage ref"
                         }
                       },
-                      "id": 894,
+                      "id": 902,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
-                      "memberLocation": "1292:5:5",
+                      "memberLocation": "1353:5:5",
                       "memberName": "round",
                       "nodeType": "MemberAccess",
                       "referencedDeclaration": 770,
-                      "src": "1287:10:5",
+                      "src": "1348:10:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -2334,78 +2456,78 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 896,
+                  "id": 904,
                   "nodeType": "ExpressionStatement",
-                  "src": "1287:12:5"
+                  "src": "1348:12:5"
                 }
               ]
             },
-            "id": 898,
+            "id": 906,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "fakeEnd",
-            "nameLocation": "1207:7:5",
+            "nameLocation": "1268:7:5",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 882,
+              "id": 890,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1214:2:5"
+              "src": "1275:2:5"
             },
             "returnParameters": {
-              "id": 883,
+              "id": 891,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1226:0:5"
+              "src": "1287:0:5"
             },
-            "scope": 957,
-            "src": "1198:108:5",
+            "scope": 965,
+            "src": "1259:108:5",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 901,
+              "id": 909,
               "nodeType": "Block",
-              "src": "1337:2:5",
+              "src": "1398:2:5",
               "statements": []
             },
-            "id": 902,
+            "id": 910,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "deal",
-            "nameLocation": "1321:4:5",
+            "nameLocation": "1382:4:5",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 899,
+              "id": 907,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1325:2:5"
+              "src": "1386:2:5"
             },
             "returnParameters": {
-              "id": 900,
+              "id": 908,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1337:0:5"
+              "src": "1398:0:5"
             },
-            "scope": 957,
-            "src": "1312:27:5",
+            "scope": 965,
+            "src": "1373:27:5",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 919,
+              "id": 927,
               "nodeType": "Block",
-              "src": "1367:97:5",
+              "src": "1428:97:5",
               "statements": [
                 {
                   "expression": {
-                    "id": 908,
+                    "id": 916,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2413,30 +2535,30 @@
                     "nodeType": "UnaryOperation",
                     "operator": "++",
                     "prefix": false,
-                    "src": "1377:14:5",
+                    "src": "1438:14:5",
                     "subExpression": {
                       "expression": {
-                        "id": 905,
+                        "id": 913,
                         "name": "game",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 780,
-                        "src": "1377:4:5",
+                        "src": "1438:4:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_struct$_Game_$777_storage",
                           "typeString": "struct BlackJack.Game storage ref"
                         }
                       },
-                      "id": 907,
+                      "id": 915,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
-                      "memberLocation": "1382:7:5",
+                      "memberLocation": "1443:7:5",
                       "memberName": "testCnt",
                       "nodeType": "MemberAccess",
                       "referencedDeclaration": 776,
-                      "src": "1377:12:5",
+                      "src": "1438:12:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -2447,9 +2569,9 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 909,
+                  "id": 917,
                   "nodeType": "ExpressionStatement",
-                  "src": "1377:14:5"
+                  "src": "1438:14:5"
                 },
                 {
                   "condition": {
@@ -2457,34 +2579,34 @@
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     },
-                    "id": 913,
+                    "id": 921,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftExpression": {
                       "expression": {
-                        "id": 910,
+                        "id": 918,
                         "name": "game",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 780,
-                        "src": "1405:4:5",
+                        "src": "1466:4:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_struct$_Game_$777_storage",
                           "typeString": "struct BlackJack.Game storage ref"
                         }
                       },
-                      "id": 911,
+                      "id": 919,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": false,
-                      "memberLocation": "1410:7:5",
+                      "memberLocation": "1471:7:5",
                       "memberName": "testCnt",
                       "nodeType": "MemberAccess",
                       "referencedDeclaration": 776,
-                      "src": "1405:12:5",
+                      "src": "1466:12:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -2494,51 +2616,51 @@
                     "operator": "==",
                     "rightExpression": {
                       "hexValue": "31",
-                      "id": 912,
+                      "id": 920,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
                       "kind": "number",
                       "lValueRequested": false,
                       "nodeType": "Literal",
-                      "src": "1421:1:5",
+                      "src": "1482:1:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_rational_1_by_1",
                         "typeString": "int_const 1"
                       },
                       "value": "1"
                     },
-                    "src": "1405:17:5",
+                    "src": "1466:17:5",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     }
                   },
-                  "id": 918,
+                  "id": 926,
                   "nodeType": "IfStatement",
-                  "src": "1401:57:5",
+                  "src": "1462:57:5",
                   "trueBody": {
-                    "id": 917,
+                    "id": 925,
                     "nodeType": "Block",
-                    "src": "1424:34:5",
+                    "src": "1485:34:5",
                     "statements": [
                       {
                         "expression": {
                           "arguments": [],
                           "expression": {
                             "argumentTypes": [],
-                            "id": 914,
+                            "id": 922,
                             "name": "fakeEnd",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 898,
-                            "src": "1438:7:5",
+                            "referencedDeclaration": 906,
+                            "src": "1499:7:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_internal_nonpayable$__$returns$__$",
                               "typeString": "function ()"
                             }
                           },
-                          "id": 915,
+                          "id": 923,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -2547,16 +2669,16 @@
                           "nameLocations": [],
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "1438:9:5",
+                          "src": "1499:9:5",
                           "tryCall": false,
                           "typeDescriptions": {
                             "typeIdentifier": "t_tuple$__$",
                             "typeString": "tuple()"
                           }
                         },
-                        "id": 916,
+                        "id": 924,
                         "nodeType": "ExpressionStatement",
-                        "src": "1438:9:5"
+                        "src": "1499:9:5"
                       }
                     ]
                   }
@@ -2564,40 +2686,40 @@
               ]
             },
             "functionSelector": "2ae3594a",
-            "id": 920,
+            "id": 928,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "hit",
-            "nameLocation": "1354:3:5",
+            "nameLocation": "1415:3:5",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 903,
+              "id": 911,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1357:2:5"
+              "src": "1418:2:5"
             },
             "returnParameters": {
-              "id": 904,
+              "id": 912,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1367:0:5"
+              "src": "1428:0:5"
             },
-            "scope": 957,
-            "src": "1345:119:5",
+            "scope": 965,
+            "src": "1406:119:5",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 937,
+              "id": 945,
               "nodeType": "Block",
-              "src": "1494:97:5",
+              "src": "1555:97:5",
               "statements": [
                 {
                   "expression": {
-                    "id": 926,
+                    "id": 934,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2605,30 +2727,30 @@
                     "nodeType": "UnaryOperation",
                     "operator": "++",
                     "prefix": false,
-                    "src": "1504:14:5",
+                    "src": "1565:14:5",
                     "subExpression": {
                       "expression": {
-                        "id": 923,
+                        "id": 931,
                         "name": "game",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 780,
-                        "src": "1504:4:5",
+                        "src": "1565:4:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_struct$_Game_$777_storage",
                           "typeString": "struct BlackJack.Game storage ref"
                         }
                       },
-                      "id": 925,
+                      "id": 933,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
-                      "memberLocation": "1509:7:5",
+                      "memberLocation": "1570:7:5",
                       "memberName": "testCnt",
                       "nodeType": "MemberAccess",
                       "referencedDeclaration": 776,
-                      "src": "1504:12:5",
+                      "src": "1565:12:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -2639,9 +2761,9 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 927,
+                  "id": 935,
                   "nodeType": "ExpressionStatement",
-                  "src": "1504:14:5"
+                  "src": "1565:14:5"
                 },
                 {
                   "condition": {
@@ -2649,34 +2771,34 @@
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     },
-                    "id": 931,
+                    "id": 939,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftExpression": {
                       "expression": {
-                        "id": 928,
+                        "id": 936,
                         "name": "game",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 780,
-                        "src": "1532:4:5",
+                        "src": "1593:4:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_struct$_Game_$777_storage",
                           "typeString": "struct BlackJack.Game storage ref"
                         }
                       },
-                      "id": 929,
+                      "id": 937,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": false,
-                      "memberLocation": "1537:7:5",
+                      "memberLocation": "1598:7:5",
                       "memberName": "testCnt",
                       "nodeType": "MemberAccess",
                       "referencedDeclaration": 776,
-                      "src": "1532:12:5",
+                      "src": "1593:12:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -2686,51 +2808,51 @@
                     "operator": "==",
                     "rightExpression": {
                       "hexValue": "33",
-                      "id": 930,
+                      "id": 938,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
                       "kind": "number",
                       "lValueRequested": false,
                       "nodeType": "Literal",
-                      "src": "1548:1:5",
+                      "src": "1609:1:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_rational_3_by_1",
                         "typeString": "int_const 3"
                       },
                       "value": "3"
                     },
-                    "src": "1532:17:5",
+                    "src": "1593:17:5",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     }
                   },
-                  "id": 936,
+                  "id": 944,
                   "nodeType": "IfStatement",
-                  "src": "1528:57:5",
+                  "src": "1589:57:5",
                   "trueBody": {
-                    "id": 935,
+                    "id": 943,
                     "nodeType": "Block",
-                    "src": "1551:34:5",
+                    "src": "1612:34:5",
                     "statements": [
                       {
                         "expression": {
                           "arguments": [],
                           "expression": {
                             "argumentTypes": [],
-                            "id": 932,
+                            "id": 940,
                             "name": "fakeEnd",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 898,
-                            "src": "1565:7:5",
+                            "referencedDeclaration": 906,
+                            "src": "1626:7:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_internal_nonpayable$__$returns$__$",
                               "typeString": "function ()"
                             }
                           },
-                          "id": 933,
+                          "id": 941,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -2739,16 +2861,16 @@
                           "nameLocations": [],
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "1565:9:5",
+                          "src": "1626:9:5",
                           "tryCall": false,
                           "typeDescriptions": {
                             "typeIdentifier": "t_tuple$__$",
                             "typeString": "tuple()"
                           }
                         },
-                        "id": 934,
+                        "id": 942,
                         "nodeType": "ExpressionStatement",
-                        "src": "1565:9:5"
+                        "src": "1626:9:5"
                       }
                     ]
                   }
@@ -2756,40 +2878,40 @@
               ]
             },
             "functionSelector": "c2897b10",
-            "id": 938,
+            "id": 946,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "stand",
-            "nameLocation": "1479:5:5",
+            "nameLocation": "1540:5:5",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 921,
+              "id": 929,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1484:2:5"
+              "src": "1545:2:5"
             },
             "returnParameters": {
-              "id": 922,
+              "id": 930,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1494:0:5"
+              "src": "1555:0:5"
             },
-            "scope": 957,
-            "src": "1470:121:5",
+            "scope": 965,
+            "src": "1531:121:5",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 955,
+              "id": 963,
               "nodeType": "Block",
-              "src": "1626:97:5",
+              "src": "1687:97:5",
               "statements": [
                 {
                   "expression": {
-                    "id": 944,
+                    "id": 952,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2797,30 +2919,30 @@
                     "nodeType": "UnaryOperation",
                     "operator": "++",
                     "prefix": false,
-                    "src": "1636:14:5",
+                    "src": "1697:14:5",
                     "subExpression": {
                       "expression": {
-                        "id": 941,
+                        "id": 949,
                         "name": "game",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 780,
-                        "src": "1636:4:5",
+                        "src": "1697:4:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_struct$_Game_$777_storage",
                           "typeString": "struct BlackJack.Game storage ref"
                         }
                       },
-                      "id": 943,
+                      "id": 951,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
-                      "memberLocation": "1641:7:5",
+                      "memberLocation": "1702:7:5",
                       "memberName": "testCnt",
                       "nodeType": "MemberAccess",
                       "referencedDeclaration": 776,
-                      "src": "1636:12:5",
+                      "src": "1697:12:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -2831,9 +2953,9 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 945,
+                  "id": 953,
                   "nodeType": "ExpressionStatement",
-                  "src": "1636:14:5"
+                  "src": "1697:14:5"
                 },
                 {
                   "condition": {
@@ -2841,34 +2963,34 @@
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     },
-                    "id": 949,
+                    "id": 957,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftExpression": {
                       "expression": {
-                        "id": 946,
+                        "id": 954,
                         "name": "game",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 780,
-                        "src": "1664:4:5",
+                        "src": "1725:4:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_struct$_Game_$777_storage",
                           "typeString": "struct BlackJack.Game storage ref"
                         }
                       },
-                      "id": 947,
+                      "id": 955,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": false,
-                      "memberLocation": "1669:7:5",
+                      "memberLocation": "1730:7:5",
                       "memberName": "testCnt",
                       "nodeType": "MemberAccess",
                       "referencedDeclaration": 776,
-                      "src": "1664:12:5",
+                      "src": "1725:12:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -2878,51 +3000,51 @@
                     "operator": "==",
                     "rightExpression": {
                       "hexValue": "34",
-                      "id": 948,
+                      "id": 956,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
                       "kind": "number",
                       "lValueRequested": false,
                       "nodeType": "Literal",
-                      "src": "1680:1:5",
+                      "src": "1741:1:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_rational_4_by_1",
                         "typeString": "int_const 4"
                       },
                       "value": "4"
                     },
-                    "src": "1664:17:5",
+                    "src": "1725:17:5",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     }
                   },
-                  "id": 954,
+                  "id": 962,
                   "nodeType": "IfStatement",
-                  "src": "1660:57:5",
+                  "src": "1721:57:5",
                   "trueBody": {
-                    "id": 953,
+                    "id": 961,
                     "nodeType": "Block",
-                    "src": "1683:34:5",
+                    "src": "1744:34:5",
                     "statements": [
                       {
                         "expression": {
                           "arguments": [],
                           "expression": {
                             "argumentTypes": [],
-                            "id": 950,
+                            "id": 958,
                             "name": "fakeEnd",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 898,
-                            "src": "1697:7:5",
+                            "referencedDeclaration": 906,
+                            "src": "1758:7:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_internal_nonpayable$__$returns$__$",
                               "typeString": "function ()"
                             }
                           },
-                          "id": 951,
+                          "id": 959,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -2931,16 +3053,16 @@
                           "nameLocations": [],
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "1697:9:5",
+                          "src": "1758:9:5",
                           "tryCall": false,
                           "typeDescriptions": {
                             "typeIdentifier": "t_tuple$__$",
                             "typeString": "tuple()"
                           }
                         },
-                        "id": 952,
+                        "id": 960,
                         "nodeType": "ExpressionStatement",
-                        "src": "1697:9:5"
+                        "src": "1758:9:5"
                       }
                     ]
                   }
@@ -2948,34 +3070,34 @@
               ]
             },
             "functionSelector": "a7e1f6a2",
-            "id": 956,
+            "id": 964,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "doubleDown",
-            "nameLocation": "1606:10:5",
+            "nameLocation": "1667:10:5",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 939,
+              "id": 947,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1616:2:5"
+              "src": "1677:2:5"
             },
             "returnParameters": {
-              "id": 940,
+              "id": 948,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1626:0:5"
+              "src": "1687:0:5"
             },
-            "scope": 957,
-            "src": "1597:126:5",
+            "scope": 965,
+            "src": "1658:126:5",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 965,
-        "src": "82:2448:5",
+        "scope": 973,
+        "src": "82:2509:5",
         "usedErrors": []
       },
       {
@@ -2983,42 +3105,42 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 958,
+              "id": 966,
               "name": "Mortal",
               "nameLocations": [
-                "2554:6:5"
+                "2615:6:5"
               ],
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 1006,
-              "src": "2554:6:5"
+              "referencedDeclaration": 1014,
+              "src": "2615:6:5"
             },
-            "id": 959,
+            "id": 967,
             "nodeType": "InheritanceSpecifier",
-            "src": "2554:6:5"
+            "src": "2615:6:5"
           }
         ],
         "canonicalName": "blackJack",
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 964,
+        "id": 972,
         "linearizedBaseContracts": [
-          964,
-          1006,
-          993
+          972,
+          1014,
+          1001
         ],
         "name": "blackJack",
-        "nameLocation": "2541:9:5",
+        "nameLocation": "2602:9:5",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 962,
+              "id": 970,
               "nodeType": "Block",
-              "src": "2629:2:5",
+              "src": "2690:2:5",
               "statements": []
             },
-            "id": 963,
+            "id": 971,
             "implemented": true,
             "kind": "receive",
             "modifiers": [],
@@ -3026,30 +3148,30 @@
             "nameLocation": "-1:-1:-1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 960,
+              "id": 968,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "2609:2:5"
+              "src": "2670:2:5"
             },
             "returnParameters": {
-              "id": 961,
+              "id": 969,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "2629:0:5"
+              "src": "2690:0:5"
             },
-            "scope": 964,
-            "src": "2602:29:5",
+            "scope": 972,
+            "src": "2663:29:5",
             "stateMutability": "payable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 965,
-        "src": "2532:101:5",
+        "scope": 973,
+        "src": "2593:101:5",
         "usedErrors": []
       }
     ],
-    "src": "32:2602:5"
+    "src": "32:2663:5"
   },
   "compiler": {
     "name": "solc",
@@ -3057,7 +3179,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.13",
-  "updatedAt": "2023-06-10T18:01:08.534Z",
+  "updatedAt": "2023-06-11T07:22:53.261Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

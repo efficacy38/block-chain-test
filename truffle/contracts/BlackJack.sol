@@ -47,6 +47,7 @@ contract BlackJack {
         lockEstate();
 
         game = Game(0, 0, "undeterminted", 0);
+        emit status(game.round, game.step, "undeterminted");
     }
 
     function fakeEnd() internal {

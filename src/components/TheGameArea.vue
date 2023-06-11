@@ -14,40 +14,30 @@
     <TheControl @hit="onHit" @stand="onStand" @double="onDoubleDown" />
 
     <!-- Modal -->
-    <div :class="['modal', isModalOpen ? 'open show d-block' : 'fade']" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"><span v-if="roundStatus !== 'undeterminted'">You {{
-              roundStatus }}. </span>Make a New Game?</h5>
-          </div>
-          <div class="modal-body">
-            <div>click New Game to play another game</div>
-            <div>click Exit to redeem all your money</div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" @click="startGameUI">New Game</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="$router.push('/dex')">Redeem
-              Token</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <SettleModal :isRestoreDone="isRestoreDone" :isModalOpen="isModalOpen" :roundStatus="roundStatus"
+      :startStatus="startStatus" @startGameUI="startGameUI" @toggleNewGameModal="toggleNewGameModal"></SettleModal>
 
   </main>
 </template>
 
-<script>
+<script setup>
+import { GAME_STATUS } from "../variables.js"
 import TheControl from "./TheGameArea/TheControl.vue"
 import PlayingCard from "./TheGameArea/GameHand/PlayingCard.vue"
-import { GAME_STATUS } from "../variables.js"
+import SettleModal from "./TheGameArea/SettleModal.vue"
 import { web3, getRoundStatus, startNewGame, getPlayerCards, getDealerCards, hit, stand, doubleDown, unSubscribeRoundStatus, subscribeRoundStatus } from "../web3Provider.js"
+</script>
 
+<script>
 export default {
   data() {
     return {
-      isModalOpen: true,
       roundStatus: GAME_STATUS.UNDETERMINED,
+      isModalOpen: true,
+      startStatus: {
+        type: "",
+        message: "",
+      },
       dealer: {
         cards: []
       },
@@ -56,15 +46,26 @@ export default {
       }
     }
   },
+  computed: {
+    isRestoreDone() {
+      return this.dealer.cards.length !== 0 && this.player.cards.length !== 0
+    }
+  },
   components: {
     TheControl,
-    PlayingCard
+    PlayingCard,
+    SettleModal,
   },
   methods: {
+    setStartStatusDialog(type, message) {
+      this.startStatus.type = type;
+      this.startStatus.message = message;
+    },
     async startGameUI() {
-      await startNewGame()
-      this.isModalOpen = false;
-      this.roundStatus = await getRoundStatus();
+      let isStartOk = await startNewGame(this.setStartStatusDialog);
+      if (isStartOk) {
+        this.toggleNewGameModal()
+      }
     },
     async onHit() {
       console.log("hit");
@@ -88,9 +89,6 @@ export default {
       this.roundStatus = await getRoundStatus();
       // wait for event and get new card info
       this.roundStatus = await getRoundStatus();
-      if (this.roundStatus !== GAME_STATUS.UNDETERMINED) {
-        this.toggleNewGameModal()
-      }
     },
     async updateCards() {
       [this.player.cards, this.dealer.cards] = await Promise.all([getPlayerCards(), getDealerCards()]);
@@ -101,11 +99,13 @@ export default {
     subscribeRoundStatus({
       onData: function (rawEvent) {
         let event = web3.eth.abi.decodeParameters(['uint', 'uint', 'string'], rawEvent.data);
-        console.log(event)
+        console.log("bbb", event)
         let round = event[0], step = event[1];
         this.roundStatus = event[2];
         if (this.roundStatus !== GAME_STATUS.UNDETERMINED) {
-          this.toggleNewGameModal()
+          this.isModalOpen = true;
+        } else {
+          this.isModalOpen = false;
         }
       }.bind(this)
     })

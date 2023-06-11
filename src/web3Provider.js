@@ -200,23 +200,32 @@ export let cnt = 0;
 const sleep = (ms = 200) => new Promise((r) => setTimeout(r, ms));
 
 // game logic
-export async function startNewGame() {
+export async function startNewGame(callback) {
     const networkId = await web3.eth.net.getId();
-    await JHTokenContract.methods
+    callback("info", "0 / 2 - setting the allowance(2 JHT)");
+    return JHTokenContract.methods
         .approve(BlackJackBuild.networks[networkId].address, web3.utils.toWei("2", "ether"))
         .send({ from: selectAccount })
-        .catch((err) => {
-            console.log(err)
+        .then(async () => {
+            callback("info", "1 / 2 - allowance setting properly")
+            await sleep(2000);
         })
-    await BlackJackContract.methods.play().send({ from: selectAccount })
-    return;
+        .then(() => {
+            callback("info", "2 / 2 - lock your token(transfer to Game Contract)")
+            return BlackJackContract.methods.play().send({ from: selectAccount })
+        })
+        .then(() => {
+            callback("", "")
+            return true
+        })
+        .catch((err) => {
+            callback("danger", err.message);
+            return false;
+        })
 }
 
 export async function getRoundStatus() {
     if (cnt === 0) return GAME_STATUS.UNDETERMINED;
-    const randN = Math.ceil(Math.random() * 3) - 1;
-    console.log(cnt, randN)
-    return Object.values(GAME_STATUS)[randN];
 }
 
 export async function getPlayerCards() {
@@ -256,25 +265,18 @@ export async function stand() {
         .send({ from: selectAccount });
 }
 
-
 export const subscribeRoundStatus = async (callbacks = {}) => {
 
     let currentBlockNum = await web3.eth.getBlockNumber().then(n => n + 1);
     const { onData, onChanged, onError } = callbacks;
 
-    console.log('123', {
-        topics: [
-            Web3.utils.sha3("status(uint256,uint256,string)"),
-        ],
-        fromBlock: currentBlockNum,
-    }
-    )
     let subscription = web3.eth.subscribe('logs',
         {
             topics: [
                 Web3.utils.sha3("status(uint256,uint256,string)"),
             ],
-            fromBlock: currentBlockNum,
+            fromBlock: '0',
+            toBlock: 'latest',
         }
     )
 
