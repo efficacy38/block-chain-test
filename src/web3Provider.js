@@ -2,11 +2,13 @@ import Web3 from "web3";
 import FaucetBuild from "./../truffle/build/contracts/Faucet.json";
 import JHTokenDexBuild from "./../truffle/build/contracts/JHTokenDEX.json";
 import JHTokenBuild from "./../truffle/build/contracts/JHToken.json";
+import BlackJackBuild from "./../truffle/build/contracts/BlackJack.json";
+import { GAME_STATUS } from "./variables.js";
 
 let isInitialize = false;
-let FaucetContract, JHTokenDexContract, JHTokenContract;
+let FaucetContract, JHTokenDexContract, JHTokenContract, BlackJackContract;
 let web3, selectAccount;
-let JHTokenAddress, JHTokenDexAddress;
+let JHTokenAddress, JHTokenDexAddress, BlackJackAddress;
 
 export {
     web3,
@@ -17,7 +19,6 @@ export {
 };
 
 // get the token's balance
-
 export const getBalance = async (address) => {
     return web3.eth.getBalance(address);
 };
@@ -45,7 +46,6 @@ export const getDexJHTBalance = async () => {
 
 export const getAddress = async (contractBuild) => {
     const networkId = await web3.eth.net.getId();
-
     return getJHTBalance(contractBuild.networks[networkId].address);
 };
 
@@ -92,8 +92,14 @@ export const init = async () => {
             JHTokenDexBuild.networks[networkId].address
         );
 
+        BlackJackContract = new web3.eth.Contract(
+            BlackJackBuild.abi,
+            BlackJackBuild.networks[networkId].address
+        );
+
         JHTokenAddress = JHTokenBuild.networks[networkId].address;
         JHTokenDexAddress = JHTokenDexBuild.networks[networkId].address;
+        BlackJackAddress = BlackJackBuild.networks[networkId].address;
         isInitialize = true;
         return true;
     } else {
@@ -164,7 +170,6 @@ export const unSubscribeWithdrawal = (subsciption) => {
 };
 
 // exchange the coins
-
 export const buyJHT = async (amount) => {
     return JHTokenDexContract.methods
         .buy()
@@ -186,6 +191,114 @@ export const sellJHT = async (amount) => {
     return JHTokenDexContract.methods
         .sell(web3.utils.toWei(amount, "ether"))
         .send({ from: selectAccount });
+};
+
+// game area
+export let cnt = 0;
+const sleep = (ms = 200) => new Promise((r) => setTimeout(r, ms));
+
+// game logic
+export async function startNewGame(callback) {
+    const networkId = await web3.eth.net.getId();
+    callback("info", "0 / 2 - setting the allowance(2 JHT)");
+    return JHTokenContract.methods
+        .approve(
+            BlackJackBuild.networks[networkId].address,
+            web3.utils.toWei("2", "ether")
+        )
+        .send({ from: selectAccount })
+        .then(async () => {
+            let allowance = await JHTokenContract.methods
+                .allowance(selectAccount, BlackJackAddress)
+                .call();
+            if (allowance < Web3.utils.toWei("2", "ether")) {
+                throw new Error(
+                    "not enough allowance, click use default(or set allowance to 2)"
+                );
+            }
+        })
+        .then(async () => {
+            callback("info", "1 / 2 - allowance setting properly");
+        })
+        .then(() => {
+            callback("info", "2 / 2 - lock your token(transfer to Game Contract)");
+            return BlackJackContract.methods.play().send({ from: selectAccount });
+        })
+        .then(() => {
+            callback("", "");
+            return true;
+        })
+        .catch((err) => {
+            console.log(err);
+            callback("danger", err.message);
+            return false;
+        });
+}
+
+export async function getRoundStatus() {
+    if (cnt === 0) return GAME_STATUS.UNDETERMINED;
+}
+
+export async function getPlayerCards() {
+    return BlackJackContract.methods
+        .getPlayerCards()
+        .call()
+        .then((rawCard) =>
+            rawCard.map((card) => ({
+                suit: card[0],
+                value: card[1],
+                isFaceDown: card[2],
+            }))
+        );
+}
+
+export async function getDealerCards() {
+    return BlackJackContract.methods
+        .getDealerCards()
+        .call()
+        .then((rawCard) =>
+            rawCard.map((card) => ({
+                suit: card[0],
+                value: card[1],
+                isFaceDown: card[2],
+            }))
+        );
+}
+
+// start the black jack
+export async function start() {
+    return;
+}
+
+export async function hit() {
+    await BlackJackContract.methods.hit().send({ from: selectAccount });
+}
+export async function doubleDown() {
+    await BlackJackContract.methods.doubleDown().send({ from: selectAccount });
+}
+export async function stand() {
+    await BlackJackContract.methods.stand().send({ from: selectAccount });
+}
+
+export const subscribeRoundStatus = async (callbacks = {}) => {
+    let currentBlockNum = await web3.eth.getBlockNumber().then((n) => n + 1);
+    const { onData, onChanged, onError } = callbacks;
+
+    let subscription = web3.eth.subscribe("logs", {
+        topics: [Web3.utils.sha3("status(uint256,uint256,string)")],
+        fromBlock: "0",
+        toBlock: "latest",
+    });
+
+    if (onData) subscription.on("data", onData);
+    if (onChanged) subscription.on("changed", onChanged);
+    if (onError) subscription.on("error", onError);
+
+    return subscription;
+};
+
+export const unSubscribeRoundStatus = (subsciption) => {
+    subsciption.off("data");
 };
 
 export const addTokenToWallet = async () => {

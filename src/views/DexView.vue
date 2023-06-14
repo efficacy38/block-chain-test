@@ -1,8 +1,6 @@
 <template>
   <div class="container h-100">
-    <div
-      class="row justify-content-between align-items-stretch text-center pt-5"
-    >
+    <div class="row justify-content-between align-items-stretch text-center pt-5">
       <h1 class="col-12 text-white fw-light lh-1 mb-5">JHToken Dex</h1>
 
       <!-- Row 1 -->
@@ -12,39 +10,25 @@
             <div class="card-body">
               <h5 class="card-title text-start">Swap Tokens</h5>
               <div class="w-100 alert alert-primary" v-if="message">
-                {{ this.message }}
+                {{ message }}
               </div>
               <div class="input-group my-3">
                 <input type="text" class="form-control" v-model="swapAmount" />
-                <button
-                  class="btn btn-outline-secondary dropdown-toggle"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                >
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
                   {{ swapDirection == 0 ? "ETH" : "JHT" }}
                 </button>
                 <ul class="dropdown-menu">
                   <li>
-                    <span
-                      class="dropdown-item"
-                      @click="
-                        () => {
-                          this.swapDirection = 0;
-                        }
-                      "
-                      >ETH</span
-                    >
+                    <span class="dropdown-item" @click="() => {
+                        this.swapDirection = 0;
+                      }
+                      ">ETH</span>
                   </li>
                   <li>
-                    <span
-                      class="dropdown-item"
-                      @click="
-                        () => {
-                          this.swapDirection = 1;
-                        }
-                      "
-                      >JHT</span
-                    >
+                    <span class="dropdown-item" @click="() => {
+                        this.swapDirection = 1;
+                      }
+                      ">JHT</span>
                   </li>
                 </ul>
               </div>
@@ -52,60 +36,34 @@
               <div>To</div>
 
               <div class="input-group my-3" style="padding-bottom: 70px">
-                <input
-                  type="number"
-                  class="form-control"
-                  :value="swapAmount"
-                  disabled
-                />
-                <button
-                  class="btn btn-outline-secondary dropdown-toggle"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                >
+                <input type="number" class="form-control" :value="swapAmount" disabled />
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
                   {{ swapDirection == 0 ? "JHT" : "ETH" }}
                 </button>
                 <ul class="dropdown-menu">
                   <li>
-                    <span
-                      class="dropdown-item"
-                      @click="
-                        () => {
-                          this.swapDirection = 0;
-                        }
-                      "
-                      >JHT</span
-                    >
+                    <span class="dropdown-item" @click="() => {
+                        this.swapDirection = 0;
+                      }
+                      ">JHT</span>
                   </li>
                   <li>
-                    <span
-                      class="dropdown-item"
-                      @click="
-                        () => {
-                          this.swapDirection = 1;
-                        }
-                      "
-                      >ETH</span
-                    >
+                    <span class="dropdown-item" @click="() => {
+                        this.swapDirection = 1;
+                      }
+                      ">ETH</span>
                   </li>
                 </ul>
               </div>
 
-              <div
-                class="w-100"
-                style="
+              <div class="w-100" style="
                   position: absolute;
                   height: 70px;
                   bottom: 0;
                   left: 0;
                   padding: inherit;
-                "
-              >
-                <button
-                  class="btn btn-outline-secondary w-100 b-0"
-                  type="button"
-                  @click="swapToken"
-                >
+                ">
+                <button class="btn btn-outline-secondary w-100 b-0" type="button" @click="swapToken">
                   Swap
                 </button>
               </div>
@@ -120,12 +78,8 @@
             <div class="d-flex justify-content-between">
               <h5 class="d-flex card-title text-start">Dex Status</h5>
               <div class="d-flex">
-                <button
-                  class="m-1 p-1 btn btn-outline-secondary round"
-                  style="width: 40px; height: 40px"
-                  type="button"
-                  @click="refreashBalance"
-                >
+                <button class="m-1 p-1 btn btn-outline-secondary round" style="width: 40px; height: 40px" type="button"
+                  @click="refreashBalance">
                   <font-awesome-icon :icon="['fas', 'rotate']" />
                 </button>
               </div>
@@ -133,20 +87,12 @@
             <div class="text-start">
               <h6>
                 JHT address:
-                <code
-                  @dblclick="
-                    () => {
-                      addTokenToWallet();
-                    }
-                  "
-                  style="user-select: none"
-                  >{{ jhtAddress }}</code
-                >
-                <font-awesome-icon
-                  class="ms-2"
-                  :icon="['fas', 'circle-question']"
-                  v-tooltip="'click click token address to add the token'"
-                />
+                <code @dblclick="() => {
+                    addTokenToWallet();
+                  }
+                  " style="user-select: none">{{ jhtAddress }}</code>
+                <font-awesome-icon class="ms-2" :icon="['fas', 'circle-question']"
+                  v-tooltip="'click click token address to add the token'" />
               </h6>
               <h6>
                 DEX address: <code>{{ dexAddress }}</code>

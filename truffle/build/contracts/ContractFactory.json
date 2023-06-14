@@ -1,0 +1,231 @@
+{
+  "contractName": "ContractFactory",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "createInstance",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"createInstance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/ContractFactory.sol\":\"ContractFactory\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/ContractFactory.sol\":{\"keccak256\":\"0x72535b45271a5e714ae930025723bfe79e281ab8438cb577ab7c8e29e834ad57\",\"urls\":[\"bzz-raw://589d8c4e33865895b9b6bc6490ed7375e9b551ac0990a0e11c1e96806e370483\",\"dweb:/ipfs/QmVqntXcVo9pZR6m88odzS4cCyowjs3GEvfi185Ra9oGRN\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b5060fc8061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c8063ad50146714602d575b600080fd5b60336035565b005b604051603f90605e565b604051809103906000f080158015605a573d6000803e3d6000fd5b5050565b605c8061006b8339019056fe6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea264697066735822122076cd5745d616d43649026f8d0ef0a92f56569e3be8c7de16b7b7fefce87aabe164736f6c63430008130033a2646970667358221220111e67ad378c33bfdfcc00b4ce19163934c66c1fd48d216e79b9784badf64c8264736f6c63430008130033",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060285760003560e01c8063ad50146714602d575b600080fd5b60336035565b005b604051603f90605e565b604051809103906000f080158015605a573d6000803e3d6000fd5b5050565b605c8061006b8339019056fe6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea264697066735822122076cd5745d616d43649026f8d0ef0a92f56569e3be8c7de16b7b7fefce87aabe164736f6c63430008130033a2646970667358221220111e67ad378c33bfdfcc00b4ce19163934c66c1fd48d216e79b9784badf64c8264736f6c63430008130033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "60:97:22:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "60:97:22:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;91:64;;;:::i;:::-;;;134:14;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;91:64::o;-1:-1:-1:-;;;;;;;;:::o",
+  "source": "// ./contracts/ContractFactory.sol\npragma solidity ^0.8.0;\n\ncontract ContractFactory {\n    function createInstance() public {\n        new Contract();\n    }\n}\n\ncontract Contract {\n    constructor() public {}\n}\n",
+  "sourcePath": "/home/efficacy38/Tmp/Course/BlockChain/block-chain-test/truffle/contracts/ContractFactory.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/ContractFactory.sol",
+    "exportedSymbols": {
+      "Contract": [
+        4392
+      ],
+      "ContractFactory": [
+        4387
+      ]
+    },
+    "id": 4393,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 4377,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "35:23:22"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "ContractFactory",
+        "contractDependencies": [
+          4392
+        ],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 4387,
+        "linearizedBaseContracts": [
+          4387
+        ],
+        "name": "ContractFactory",
+        "nameLocation": "69:15:22",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 4385,
+              "nodeType": "Block",
+              "src": "124:31:22",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "id": 4382,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "NewExpression",
+                      "src": "134:12:22",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_creation_nonpayable$__$returns$_t_contract$_Contract_$4392_$",
+                        "typeString": "function () returns (contract Contract)"
+                      },
+                      "typeName": {
+                        "id": 4381,
+                        "nodeType": "UserDefinedTypeName",
+                        "pathNode": {
+                          "id": 4380,
+                          "name": "Contract",
+                          "nameLocations": [
+                            "138:8:22"
+                          ],
+                          "nodeType": "IdentifierPath",
+                          "referencedDeclaration": 4392,
+                          "src": "138:8:22"
+                        },
+                        "referencedDeclaration": 4392,
+                        "src": "138:8:22",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Contract_$4392",
+                          "typeString": "contract Contract"
+                        }
+                      }
+                    },
+                    "id": 4383,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "134:14:22",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Contract_$4392",
+                      "typeString": "contract Contract"
+                    }
+                  },
+                  "id": 4384,
+                  "nodeType": "ExpressionStatement",
+                  "src": "134:14:22"
+                }
+              ]
+            },
+            "functionSelector": "ad501467",
+            "id": 4386,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "createInstance",
+            "nameLocation": "100:14:22",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4378,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "114:2:22"
+            },
+            "returnParameters": {
+              "id": 4379,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "124:0:22"
+            },
+            "scope": 4387,
+            "src": "91:64:22",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 4393,
+        "src": "60:97:22",
+        "usedErrors": []
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "Contract",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 4392,
+        "linearizedBaseContracts": [
+          4392
+        ],
+        "name": "Contract",
+        "nameLocation": "168:8:22",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 4390,
+              "nodeType": "Block",
+              "src": "204:2:22",
+              "statements": []
+            },
+            "id": 4391,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4388,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "194:2:22"
+            },
+            "returnParameters": {
+              "id": 4389,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "204:0:22"
+            },
+            "scope": 4392,
+            "src": "183:23:22",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 4393,
+        "src": "159:49:22",
+        "usedErrors": []
+      }
+    ],
+    "src": "35:174:22"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.19+commit.7dd6d404.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.13",
+  "updatedAt": "2023-06-14T16:37:52.206Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

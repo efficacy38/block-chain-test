@@ -23,14 +23,14 @@ const router = createRouter({
       name: 'Faucet',
       component: FaucetView
     },
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   // component: () => import('../views/AboutView.vue')
-    // }
+    {
+      path: '/game',
+      name: 'game',
+      // route level code-splitting
+      // this generates a separate chunk (BlackJackView.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/BlackJackView.vue')
+    }
   ]
 })
 

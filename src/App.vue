@@ -1,19 +1,21 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import { init } from './web3Provider';
+import { RouterLink, RouterView } from "vue-router";
+import { init } from "./web3Provider";
 </script>
 
 <template>
-  <div class="vw-100 vh-100 position-relative">
+  <div class="h-100" v-if="isGame">
+    <RouterView v-if="isInit" />
+  </div>
+  <div class="vw-100 vh-100 position-relative" v-else>
     <div class="stripe"></div>
     <nav class="navbar navbar-expand-lg navbar-white bg-transparent position-relative">
-      <div class="w-100 h-100 bg-white opacity-25 position-absolute z-1"></div>
+      <div class="mz-1 w-100 h-100 bg-white opacity-25 position-absolute"></div>
       <div class="container-fluid d-flex justify-content-center">
         <RouterLink class="navbar-brand d-flex btn bg-dark text-white mx-3" to="/faucet">Faucet</RouterLink>
         <RouterLink class="navbar-brand d-flex btn bg-dark text-white mx-3" to="/dex">Dex</RouterLink>
         <RouterLink class="navbar-brand d-flex btn bg-dark text-white mx-3" to="/game">Game</RouterLink>
       </div>
-      <!-- <RouterLink to="/about">About</RouterLink> -->
     </nav>
     <div class="container">
       <RouterView v-if="isInit" />
@@ -28,15 +30,22 @@ import { init } from './web3Provider';
 export default {
   data() {
     return {
-      isInit: false
-    }
-  }, mounted() {
+      isInit: false,
+    };
+  },
+  mounted() {
+    // init the metamask web3 provider
     init().then((i) => {
       this.isInit = i;
-      console.log(this.isInit)
+      console.log(this.isInit);
     });
-  }
-}
+  },
+  computed: {
+    isGame() {
+      return this.$route.path === "/game" ? true : false;
+    },
+  },
+};
 </script>
 
 <style>
@@ -60,7 +69,7 @@ export default {
   transform-origin: left;
 }
 
-.z-1 {
+.mz-1 {
   z-index: -1;
 }
 </style>
