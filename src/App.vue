@@ -1,6 +1,6 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import { init } from './web3Provider';
+import { RouterLink, RouterView } from "vue-router";
+import { init } from "./web3Provider";
 </script>
 
 <template>
@@ -10,7 +10,7 @@ import { init } from './web3Provider';
   <div class="vw-100 vh-100 position-relative" v-else>
     <div class="stripe"></div>
     <nav class="navbar navbar-expand-lg navbar-white bg-transparent position-relative">
-      <div class="w-100 h-100 bg-white opacity-25 position-absolute z-1"></div>
+      <div class="mz-1 w-100 h-100 bg-white opacity-25 position-absolute"></div>
       <div class="container-fluid d-flex justify-content-center">
         <RouterLink class="navbar-brand d-flex btn bg-dark text-white mx-3" to="/faucet">Faucet</RouterLink>
         <RouterLink class="navbar-brand d-flex btn bg-dark text-white mx-3" to="/dex">Dex</RouterLink>
@@ -27,25 +27,25 @@ import { init } from './web3Provider';
 </template>
 
 <script>
-
 export default {
   data() {
     return {
       isInit: false,
-    }
-  }, mounted() {
+    };
+  },
+  mounted() {
     // init the metamask web3 provider
     init().then((i) => {
       this.isInit = i;
-      console.log(this.isInit)
+      console.log(this.isInit);
     });
   },
   computed: {
     isGame() {
-      return this.$route.path === '/game' ? true : false
-    }
-  }
-}
+      return this.$route.path === "/game" ? true : false;
+    },
+  },
+};
 </script>
 
 <style>
@@ -69,7 +69,7 @@ export default {
   transform-origin: left;
 }
 
-.z-1 {
+.mz-1 {
   z-index: -1;
 }
 </style>

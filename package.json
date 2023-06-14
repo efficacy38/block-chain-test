@@ -17,6 +17,7 @@
         "@fortawesome/vue-fontawesome": "^3.0.3",
         "@openzeppelin/contracts": "^4.8.3",
         "@openzeppelin/contracts-upgradeable": "^4.8.3",
+        "@popperjs/core": "^2.11.8",
         "bootstrap": "^5.2.3",
         "contracts": "file:./truffle/build/contracts",
         "moment": "^2.29.4",

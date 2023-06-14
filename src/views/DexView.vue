@@ -13,29 +13,59 @@
                 {{ message }}
               </div>
               <div class="input-group my-3">
-                <input type="text" class="form-control" v-model="swapAmount">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">{{
-                  swapDirection == 0 ? "ETH" : "JHT" }}</button>
+                <input type="text" class="form-control" v-model="swapAmount" />
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                  {{ swapDirection == 0 ? "ETH" : "JHT" }}
+                </button>
                 <ul class="dropdown-menu">
-                  <li><span class="dropdown-item" @click="swapDirection = 0">ETH</span></li>
-                  <li><span class="dropdown-item" @click="swapDirection = 1">JHT</span></li>
+                  <li>
+                    <span class="dropdown-item" @click="() => {
+                        this.swapDirection = 0;
+                      }
+                      ">ETH</span>
+                  </li>
+                  <li>
+                    <span class="dropdown-item" @click="() => {
+                        this.swapDirection = 1;
+                      }
+                      ">JHT</span>
+                  </li>
                 </ul>
               </div>
 
               <div>To</div>
 
               <div class="input-group my-3" style="padding-bottom: 70px">
-                <input type="number" class="form-control" :value="swapAmount" disabled>
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">{{
-                  swapDirection == 0 ? "JHT" : "ETH" }}</button>
+                <input type="number" class="form-control" :value="swapAmount" disabled />
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                  {{ swapDirection == 0 ? "JHT" : "ETH" }}
+                </button>
                 <ul class="dropdown-menu">
-                  <li><span class="dropdown-item" @click="swapDirection = 0">JHT</span></li>
-                  <li><span class="dropdown-item" @click="swapDirection = 1">ETH</span></li>
+                  <li>
+                    <span class="dropdown-item" @click="() => {
+                        this.swapDirection = 0;
+                      }
+                      ">JHT</span>
+                  </li>
+                  <li>
+                    <span class="dropdown-item" @click="() => {
+                        this.swapDirection = 1;
+                      }
+                      ">ETH</span>
+                  </li>
                 </ul>
               </div>
 
-              <div class="w-100" style="position: absolute; height: 70px; bottom: 0; left: 0; padding: inherit">
-                <button class="btn btn-outline-secondary w-100 b-0" type="button" @click="swapToken">Swap</button>
+              <div class="w-100" style="
+                  position: absolute;
+                  height: 70px;
+                  bottom: 0;
+                  left: 0;
+                  padding: inherit;
+                ">
+                <button class="btn btn-outline-secondary w-100 b-0" type="button" @click="swapToken">
+                  Swap
+                </button>
               </div>
             </div>
           </div>
@@ -44,7 +74,6 @@
 
       <div class="col-md-6 d-flex flex-column">
         <div class="d-flex m-2 card shadow">
-
           <div class="card-body">
             <div class="d-flex justify-content-between">
               <h5 class="d-flex card-title text-start">Dex Status</h5>
@@ -56,8 +85,18 @@
               </div>
             </div>
             <div class="text-start">
-              <h6>JHT address: {{ jhtAddress }}</h6>
-              <h6>DEX address: {{ dexAddress }}</h6>
+              <h6>
+                JHT address:
+                <code @dblclick="() => {
+                    addTokenToWallet();
+                  }
+                  " style="user-select: none">{{ jhtAddress }}</code>
+                <font-awesome-icon class="ms-2" :icon="['fas', 'circle-question']"
+                  v-tooltip="'click click token address to add the token'" />
+              </h6>
+              <h6>
+                DEX address: <code>{{ dexAddress }}</code>
+              </h6>
               <h6>JHT Balance: {{ dex.JHTAmount }} JHT</h6>
               <h6>ETH Balance: {{ dex.ETHAmount }} ETH</h6>
             </div>
@@ -90,8 +129,21 @@
 </template>
 
 <script setup>
-import { JHTokenAddress, JHTokenDexAddress, approveJHT, buyJHT, getBalance, getAllowance, getJHTBalance, getDexJHTBalance, getDexBalance, selectAccount, sellJHT } from "../web3Provider.js";
-import web3 from "web3"
+import {
+  JHTokenAddress,
+  JHTokenDexAddress,
+  approveJHT,
+  buyJHT,
+  getBalance,
+  getAllowance,
+  getJHTBalance,
+  getDexJHTBalance,
+  getDexBalance,
+  selectAccount,
+  sellJHT,
+  addTokenToWallet,
+} from "../web3Provider.js";
+import web3 from "web3";
 </script>
 <script>
 export default {
@@ -112,27 +164,26 @@ export default {
       this.refreashBalance();
     },
     refreashBalance() {
-      getDexBalance().then(amount => {
-        this.dex.ETHAmount = web3.utils.fromWei(amount)
+      getDexBalance().then((amount) => {
+        this.dex.ETHAmount = web3.utils.fromWei(amount);
       });
-      getDexJHTBalance().then(amount => {
-        this.dex.JHTAmount = web3.utils.fromWei(amount)
+      getDexJHTBalance().then((amount) => {
+        this.dex.JHTAmount = web3.utils.fromWei(amount);
       });
 
-      getBalance(selectAccount).then(amount => {
-        this.account.ETHAmount = web3.utils.fromWei(amount)
-      }
-      );
-      getJHTBalance(selectAccount).then(amount => {
-        this.account.JHTAmount = web3.utils.fromWei(amount)
+      getBalance(selectAccount).then((amount) => {
+        this.account.ETHAmount = web3.utils.fromWei(amount);
+      });
+
+      getJHTBalance(selectAccount).then((amount) => {
+        this.account.JHTAmount = web3.utils.fromWei(amount);
       });
 
       getAllowance(selectAccount).then((amount) => {
-        console.log(amount)
-        this.account.JHTAllowance = web3.utils.fromWei(amount)
-      }
-      )
-    }
+        console.log(amount);
+        this.account.JHTAllowance = web3.utils.fromWei(amount);
+      });
+    },
   },
   mounted() {
     this.refreashBalance();
@@ -145,7 +196,8 @@ export default {
       dex: {
         JHTAmount: "0",
         ETHAmount: "0",
-      }, account: {
+      },
+      account: {
         JHTAmount: "0",
         ETHAmount: "0",
         JHTAllowance: "0",
@@ -153,9 +205,9 @@ export default {
       // 0 stand for buy, 1 stand for sell
       swapDirection: "0",
       message: "",
-    }
-  }
-}
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
