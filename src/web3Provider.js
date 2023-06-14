@@ -1,56 +1,53 @@
 import Web3 from "web3";
 import FaucetBuild from "./../truffle/build/contracts/Faucet.json";
-import JHTokenDexBuild from "./../truffle/build/contracts/JHTokenDEX.json"
-import JHTokenBuild from "./../truffle/build/contracts/JHToken.json"
-import BlackJackBuild from "./../truffle/build/contracts/BlackJack.json"
-import { GAME_STATUS } from "./variables.js"
+import JHTokenDexBuild from "./../truffle/build/contracts/JHTokenDEX.json";
+import JHTokenBuild from "./../truffle/build/contracts/JHToken.json";
+import BlackJackBuild from "./../truffle/build/contracts/BlackJack.json";
+import { GAME_STATUS } from "./variables.js";
 
 let isInitialize = false;
 let FaucetContract, JHTokenDexContract, JHTokenContract, BlackJackContract;
 let web3, selectAccount;
-let JHTokenAddress, JHTokenDexAddress;
+let JHTokenAddress, JHTokenDexAddress, BlackJackAddress;
 
-export { web3, FaucetContract, selectAccount, JHTokenAddress, JHTokenDexAddress };
+export {
+    web3,
+    FaucetContract,
+    selectAccount,
+    JHTokenAddress,
+    JHTokenDexAddress,
+};
 
 // get the token's balance
 export const getBalance = async (address) => {
     return web3.eth.getBalance(address);
-}
+};
 
 export const getJHTBalance = async (address) => {
-    let balance = await JHTokenContract.methods
-        .balanceOf(address)
-        .call()
+    let balance = await JHTokenContract.methods.balanceOf(address).call();
     return balance;
-}
+};
 
 export const getAllowance = async (owner) => {
     return JHTokenContract.methods.allowance(owner, JHTokenDexAddress).call();
-}
-
+};
 
 export const getDexBalance = async () => {
     const networkId = await web3.eth.net.getId();
 
-    return getBalance(
-        JHTokenDexBuild.networks[networkId].address
-    )
-}
+    return getBalance(JHTokenDexBuild.networks[networkId].address);
+};
 
 export const getDexJHTBalance = async () => {
     const networkId = await web3.eth.net.getId();
 
-    return getJHTBalance(
-        JHTokenDexBuild.networks[networkId].address
-    )
-}
+    return getJHTBalance(JHTokenDexBuild.networks[networkId].address);
+};
 
 export const getAddress = async (contractBuild) => {
     const networkId = await web3.eth.net.getId();
-    return getJHTBalance(
-        contractBuild.networks[networkId].address
-    )
-}
+    return getJHTBalance(contractBuild.networks[networkId].address);
+};
 
 // init the web3 provider
 export const init = async () => {
@@ -72,9 +69,7 @@ export const init = async () => {
 
         window.ethereum.on("accountsChanged", function(accounts) {
             selectAccount = accounts[0];
-            console.log(
-                `current account changed to ${selectAccount}`
-            );
+            console.log(`current account changed to ${selectAccount}`);
         });
 
         // instance the web3 client
@@ -104,12 +99,13 @@ export const init = async () => {
 
         JHTokenAddress = JHTokenBuild.networks[networkId].address;
         JHTokenDexAddress = JHTokenDexBuild.networks[networkId].address;
+        BlackJackAddress = BlackJackBuild.networks[networkId].address;
         isInitialize = true;
         return true;
     } else {
         return false;
     }
-}
+};
 
 export const withdraw = async (amount, address, callbacks = {}) => {
     const { onSent, onReceipt, onConfirmation, onError } = callbacks;
@@ -127,10 +123,9 @@ export const withdraw = async (amount, address, callbacks = {}) => {
     if (onError) contract.once("error", onError);
 
     return contract;
-}
+};
 
 export const getWithdrawal = async (address) => {
-
     // console.log(FaucetContract.getPastEvent('Withdrawal'))
     if (!Web3.utils.isAddress(address)) return;
 
@@ -144,13 +139,12 @@ export const getWithdrawal = async (address) => {
             Web3.utils.padLeft(address, 64),
         ],
     });
-}
+};
 
 export const subscribeWithdrawal = (address, callbacks = {}) => {
-
     const { onData, onChanged, onError } = callbacks;
     let currentBlockNum;
-    web3.eth.getBlockNumber().then(n => currentBlockNum = n + 1);
+    web3.eth.getBlockNumber().then((n) => (currentBlockNum = n + 1));
 
     self = this;
     let subscription = FaucetContract.events.Withdrawal({
@@ -167,33 +161,37 @@ export const subscribeWithdrawal = (address, callbacks = {}) => {
     if (onError) subscription.on("error", onError);
 
     return subscription;
-}
+};
 
 export const unSubscribeWithdrawal = (subsciption) => {
-    subsciption.off("data")
-    subsciption.off("error")
-    subsciption.off("changed")
-}
+    subsciption.off("data");
+    subsciption.off("error");
+    subsciption.off("changed");
+};
 
 // exchange the coins
 export const buyJHT = async (amount) => {
-    return JHTokenDexContract
-        .methods.buy()
-        .send({ value: web3.utils.toWei(amount, "ether"), from: selectAccount })
-}
+    return JHTokenDexContract.methods
+        .buy()
+        .send({ value: web3.utils.toWei(amount, "ether"), from: selectAccount });
+};
 
 export const approveJHT = async (amount) => {
     const networkId = await web3.eth.net.getId();
 
     return JHTokenContract.methods
-        .approve(JHTokenDexBuild.networks[networkId].address, web3.utils.toWei(amount, "ether"))
-        .send({ from: selectAccount })
-}
+        .approve(
+            JHTokenDexBuild.networks[networkId].address,
+            web3.utils.toWei(amount, "ether")
+        )
+        .send({ from: selectAccount });
+};
 
 export const sellJHT = async (amount) => {
-    return JHTokenDexContract.methods.sell(web3.utils.toWei(amount, "ether"))
+    return JHTokenDexContract.methods
+        .sell(web3.utils.toWei(amount, "ether"))
         .send({ from: selectAccount });
-}
+};
 
 // game area
 export let cnt = 0;
@@ -204,24 +202,37 @@ export async function startNewGame(callback) {
     const networkId = await web3.eth.net.getId();
     callback("info", "0 / 2 - setting the allowance(2 JHT)");
     return JHTokenContract.methods
-        .approve(BlackJackBuild.networks[networkId].address, web3.utils.toWei("2", "ether"))
+        .approve(
+            BlackJackBuild.networks[networkId].address,
+            web3.utils.toWei("2", "ether")
+        )
         .send({ from: selectAccount })
         .then(async () => {
-            callback("info", "1 / 2 - allowance setting properly")
-            await sleep(2000);
+            let allowance = await JHTokenContract.methods
+                .allowance(selectAccount, BlackJackAddress)
+                .call();
+            if (allowance < Web3.utils.toWei("2", "ether")) {
+                throw new Error(
+                    "not enough allowance, click use default(or set allowance to 2)"
+                );
+            }
+        })
+        .then(async () => {
+            callback("info", "1 / 2 - allowance setting properly");
         })
         .then(() => {
-            callback("info", "2 / 2 - lock your token(transfer to Game Contract)")
-            return BlackJackContract.methods.play().send({ from: selectAccount })
+            callback("info", "2 / 2 - lock your token(transfer to Game Contract)");
+            return BlackJackContract.methods.play().send({ from: selectAccount });
         })
         .then(() => {
-            callback("", "")
-            return true
+            callback("", "");
+            return true;
         })
         .catch((err) => {
+            console.log(err);
             callback("danger", err.message);
             return false;
-        })
+        });
 }
 
 export async function getRoundStatus() {
@@ -229,19 +240,29 @@ export async function getRoundStatus() {
 }
 
 export async function getPlayerCards() {
-    await sleep()
-    return [
-        { "suit": "S", value: 2, isHidden: false },
-        { "suit": "D", value: 2, isHidden: false },
-    ]
+    return BlackJackContract.methods
+        .getPlayerCards()
+        .call()
+        .then((rawCard) =>
+            rawCard.map((card) => ({
+                suit: card[0],
+                value: card[1],
+                isFaceDown: card[2],
+            }))
+        );
 }
 
 export async function getDealerCards() {
-    await sleep()
-    return [
-        { "suit": "C", value: 3, isHidden: true },
-        { "suit": "H", value: 3, isHidden: false },
-    ]
+    return BlackJackContract.methods
+        .getDealerCards()
+        .call()
+        .then((rawCard) =>
+            rawCard.map((card) => ({
+                suit: card[0],
+                value: card[1],
+                isFaceDown: card[2],
+            }))
+        );
 }
 
 // start the black jack
@@ -250,43 +271,32 @@ export async function start() {
 }
 
 export async function hit() {
-    await BlackJackContract.methods
-        .hit()
-        .send({ from: selectAccount });
+    await BlackJackContract.methods.hit().send({ from: selectAccount });
 }
 export async function doubleDown() {
-    await BlackJackContract.methods
-        .doubleDown()
-        .send({ from: selectAccount });
+    await BlackJackContract.methods.doubleDown().send({ from: selectAccount });
 }
 export async function stand() {
-    await BlackJackContract.methods
-        .stand()
-        .send({ from: selectAccount });
+    await BlackJackContract.methods.stand().send({ from: selectAccount });
 }
 
 export const subscribeRoundStatus = async (callbacks = {}) => {
-
-    let currentBlockNum = await web3.eth.getBlockNumber().then(n => n + 1);
+    let currentBlockNum = await web3.eth.getBlockNumber().then((n) => n + 1);
     const { onData, onChanged, onError } = callbacks;
 
-    let subscription = web3.eth.subscribe('logs',
-        {
-            topics: [
-                Web3.utils.sha3("status(uint256,uint256,string)"),
-            ],
-            fromBlock: '0',
-            toBlock: 'latest',
-        }
-    )
+    let subscription = web3.eth.subscribe("logs", {
+        topics: [Web3.utils.sha3("status(uint256,uint256,string)")],
+        fromBlock: "0",
+        toBlock: "latest",
+    });
 
     if (onData) subscription.on("data", onData);
     if (onChanged) subscription.on("changed", onChanged);
     if (onError) subscription.on("error", onError);
 
     return subscription;
-}
+};
 
 export const unSubscribeRoundStatus = (subsciption) => {
-    subsciption.off("data")
-}
+    subsciption.off("data");
+};

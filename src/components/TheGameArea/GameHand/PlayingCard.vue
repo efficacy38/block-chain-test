@@ -1,5 +1,5 @@
 <template>
-  <div class="card" :class="{ 'face-down': isFaceDown }">
+  <div class="poker" :class="{ 'face-down': isFaceDown }">
     <div class="front">
       <div class="top-corner">
         <PlayingCardValue :value="card.value" :suit="card.suit" />
@@ -11,24 +11,24 @@
 </template>
 
 <script>
-import PlayingCardValue from './PlayingCardValue.vue'
-import PlayingCardSuit from './PlayingCardSuit.vue'
+import PlayingCardValue from "./PlayingCardValue.vue";
+import PlayingCardSuit from "./PlayingCardSuit.vue";
 export default {
   components: {
     PlayingCardValue,
-    PlayingCardSuit
+    PlayingCardSuit,
   },
   props: {
     card: {
       type: Object,
-      required: true
+      required: true,
     },
     isFaceDown: {
       type: Boolean,
-      required: true
-    }
-  }
-}
+      required: true,
+    },
+  },
+};
 </script>
 
 <style>
@@ -37,7 +37,7 @@ export default {
 }
 </style>
 <style lang="scss" scoped>
-.card {
+.poker {
   background: transparent;
   position: relative;
   display: inline-block;
@@ -47,8 +47,8 @@ export default {
   transition: all 0.2s ease;
 }
 
-.card .front,
-.card .back {
+.poker .front,
+.poker .back {
   border-radius: 0.75rem;
   position: absolute;
   left: 0;
@@ -63,26 +63,26 @@ export default {
   transform-style: preserve-3d;
 }
 
-.card .front {
-  background-image: url('../../../assets/card-front.svg');
+.poker .front {
+  background-image: url("@/assets/card-front.svg");
   background-color: $secondary-color;
 }
 
-.card .back {
-  background-image: url('../../../assets/card-back.svg');
+.poker .back {
+  background-image: url("@/assets/card-back.svg");
   transform: rotateY(-180deg);
   background-color: $red;
 }
 
-.card.face-down .back {
+.poker.face-down .back {
   transform: rotateY(0deg);
 }
 
-.card.face-down .front {
+.poker.face-down .front {
   transform: rotateY(180deg);
 }
 
-.card .top-corner {
+.poker .top-corner {
   position: absolute;
   text-align: center;
   top: 0.5rem;
