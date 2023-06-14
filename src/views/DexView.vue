@@ -132,8 +132,21 @@
             </div>
             <div class="text-start">
               <h6>
-                JHT address: <code>{{ jhtAddress }}</code>
-                <btn class="btn btn-outline-primary">add to wallet</btn>
+                JHT address:
+                <code
+                  @dblclick="
+                    () => {
+                      addTokenToWallet();
+                    }
+                  "
+                  style="user-select: none"
+                  >{{ jhtAddress }}</code
+                >
+                <font-awesome-icon
+                  class="ms-2"
+                  :icon="['fas', 'circle-question']"
+                  v-tooltip="'click click token address to add the token'"
+                />
               </h6>
               <h6>
                 DEX address: <code>{{ dexAddress }}</code>
@@ -182,6 +195,7 @@ import {
   getDexBalance,
   selectAccount,
   sellJHT,
+  addTokenToWallet,
 } from "../web3Provider.js";
 import web3 from "web3";
 </script>

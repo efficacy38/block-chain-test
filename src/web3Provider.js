@@ -1,56 +1,53 @@
 import Web3 from "web3";
 import FaucetBuild from "./../truffle/build/contracts/Faucet.json";
-import JHTokenDexBuild from "./../truffle/build/contracts/JHTokenDEX.json"
-import JHTokenBuild from "./../truffle/build/contracts/JHToken.json"
+import JHTokenDexBuild from "./../truffle/build/contracts/JHTokenDEX.json";
+import JHTokenBuild from "./../truffle/build/contracts/JHToken.json";
 
 let isInitialize = false;
 let FaucetContract, JHTokenDexContract, JHTokenContract;
 let web3, selectAccount;
 let JHTokenAddress, JHTokenDexAddress;
 
-export { web3, FaucetContract, selectAccount, JHTokenAddress, JHTokenDexAddress };
+export {
+    web3,
+    FaucetContract,
+    selectAccount,
+    JHTokenAddress,
+    JHTokenDexAddress,
+};
 
 // get the token's balance
 
 export const getBalance = async (address) => {
     return web3.eth.getBalance(address);
-}
+};
 
 export const getJHTBalance = async (address) => {
-    let balance = await JHTokenContract.methods
-        .balanceOf(address)
-        .call()
+    let balance = await JHTokenContract.methods.balanceOf(address).call();
     return balance;
-}
+};
 
 export const getAllowance = async (owner) => {
     return JHTokenContract.methods.allowance(owner, JHTokenDexAddress).call();
-}
-
+};
 
 export const getDexBalance = async () => {
     const networkId = await web3.eth.net.getId();
 
-    return getBalance(
-        JHTokenDexBuild.networks[networkId].address
-    )
-}
+    return getBalance(JHTokenDexBuild.networks[networkId].address);
+};
 
 export const getDexJHTBalance = async () => {
     const networkId = await web3.eth.net.getId();
 
-    return getJHTBalance(
-        JHTokenDexBuild.networks[networkId].address
-    )
-}
+    return getJHTBalance(JHTokenDexBuild.networks[networkId].address);
+};
 
 export const getAddress = async (contractBuild) => {
     const networkId = await web3.eth.net.getId();
 
-    return getJHTBalance(
-        contractBuild.networks[networkId].address
-    )
-}
+    return getJHTBalance(contractBuild.networks[networkId].address);
+};
 
 // init the web3 provider
 export const init = async () => {
@@ -72,9 +69,7 @@ export const init = async () => {
 
         window.ethereum.on("accountsChanged", function(accounts) {
             selectAccount = accounts[0];
-            console.log(
-                `current account changed to ${selectAccount}`
-            );
+            console.log(`current account changed to ${selectAccount}`);
         });
 
         // instance the web3 client
@@ -104,7 +99,7 @@ export const init = async () => {
     } else {
         return false;
     }
-}
+};
 
 export const withdraw = async (amount, address, callbacks = {}) => {
     const { onSent, onReceipt, onConfirmation, onError } = callbacks;
@@ -122,10 +117,9 @@ export const withdraw = async (amount, address, callbacks = {}) => {
     if (onError) contract.once("error", onError);
 
     return contract;
-}
+};
 
 export const getWithdrawal = async (address) => {
-
     // console.log(FaucetContract.getPastEvent('Withdrawal'))
     if (!Web3.utils.isAddress(address)) return;
 
@@ -139,13 +133,12 @@ export const getWithdrawal = async (address) => {
             Web3.utils.padLeft(address, 64),
         ],
     });
-}
+};
 
 export const subscribeWithdrawal = (address, callbacks = {}) => {
-
     const { onData, onChanged, onError } = callbacks;
     let currentBlockNum;
-    web3.eth.getBlockNumber().then(n => currentBlockNum = n + 1);
+    web3.eth.getBlockNumber().then((n) => (currentBlockNum = n + 1));
 
     self = this;
     let subscription = FaucetContract.events.Withdrawal({
@@ -162,31 +155,60 @@ export const subscribeWithdrawal = (address, callbacks = {}) => {
     if (onError) subscription.on("error", onError);
 
     return subscription;
-}
+};
 
 export const unSubscribeWithdrawal = (subsciption) => {
-    subsciption.off("data")
-    subsciption.off("error")
-    subsciption.off("changed")
-}
+    subsciption.off("data");
+    subsciption.off("error");
+    subsciption.off("changed");
+};
 
 // exchange the coins
 
 export const buyJHT = async (amount) => {
-    return JHTokenDexContract
-        .methods.buy()
-        .send({ value: web3.utils.toWei(amount, "ether"), from: selectAccount })
-}
+    return JHTokenDexContract.methods
+        .buy()
+        .send({ value: web3.utils.toWei(amount, "ether"), from: selectAccount });
+};
 
 export const approveJHT = async (amount) => {
     const networkId = await web3.eth.net.getId();
 
     return JHTokenContract.methods
-        .approve(JHTokenDexBuild.networks[networkId].address, web3.utils.toWei(amount, "ether"))
-        .send({ from: selectAccount })
-}
+        .approve(
+            JHTokenDexBuild.networks[networkId].address,
+            web3.utils.toWei(amount, "ether")
+        )
+        .send({ from: selectAccount });
+};
 
 export const sellJHT = async (amount) => {
-    return JHTokenDexContract.methods.sell(web3.utils.toWei(amount, "ether"))
+    return JHTokenDexContract.methods
+        .sell(web3.utils.toWei(amount, "ether"))
         .send({ from: selectAccount });
-}
+};
+
+export const addTokenToWallet = async () => {
+    try {
+        // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+        const wasAdded = await ethereum.request({
+            method: "wallet_watchAsset",
+            params: {
+                type: "ERC20", // Initially only supports ERC20, but eventually more!
+                options: {
+                    address: JHTokenAddress, // The address that the token is at.
+                    symbol: "JHT", // A ticker symbol or shorthand, up to 5 chars.
+                    decimals: 18, // The number of decimals in the token
+                },
+            },
+        });
+
+        if (wasAdded) {
+            console.log("Thanks for your interest!");
+        } else {
+            console.log("Your loss!");
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
